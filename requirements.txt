@@ -1,0 +1,16 @@
+fastapi==0.135.2
+httpx==0.28.1
+Jinja2>=3.1,<4
+langchain_community==0.4.1
+langchain_core==1.2.20
+langchain_ollama==1.0.1
+Pillow==12.1.1
+pydantic==2.12.5
+pytest==9.0.2
+python-dotenv==1.2.2
+python-multipart>=0.0.22
+tqdm==4.67.1
+transformers==5.3.0
+lm-format-enforcer>=0.10,<0.11
+peft>=0.13
+uvicorn[standard]>=0.30,<0.31

@@ -1,0 +1,33 @@
+{
+    "case_id": "20260209_001",
+    "image_evidence": {
+      "lesions": [
+        {
+          "area_ratio": 0.12,
+          "shape": "同心轮纹/靶斑",
+          "boundary": ["清晰", "黄色晕圈"],
+          "color": ["褐变"],
+          "tissue_state": ["坏死"],
+          "distribution_position": ["叶缘"],
+          "distribution_pattern": ["簇状"],
+          "confidence": {
+            "shape": 0.84,
+            "boundary": 0.76,
+            "color": 0.88,
+            "tissue_state": 0.81
+          }
+        }
+      ]
+    },
+    "leaf_level": {
+      "morph_change": ["卷曲"],
+      "pest_or_mechanical_hint": ["无"],
+      "uncertainty_flags": ["光照反光影响边界判断"]
+    },
+    "farmer_text": {
+      "symptom_days": 3,
+      "watering": "recently increased",
+      "location": "greenhouse"
+    }
+  }
+  

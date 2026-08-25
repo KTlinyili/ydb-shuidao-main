@@ -1,0 +1,29 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pth
+*.egg-info/
+
+# 环境变量（含密钥，切勿提交）
+.env
+.env.local
+
+# 前端
+web/node_modules/
+web/dist/
+web/*.local
+
+# 运行产物与日志
+runs/
+_error_logs/
+
+# 数据库与模型权重（按需放开）
+*.db
+*.onnx
+*.rknn
+*.pt
+
+# 系统文件
+.DS_Store
+Thumbs.db

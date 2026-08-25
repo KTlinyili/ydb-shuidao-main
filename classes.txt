@@ -1,0 +1,8 @@
+rice_blast
+sheath_blight
+bacterial_leaf_blight
+brown_spot
+bacterial_stripe
+rice_planthopper
+rice_leaf_roller
+rice_stem_borer

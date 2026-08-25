@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OminiBerry草莓病害诊断与防治工作台</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍓</text></svg>"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css?v={{ static_version }}" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <nav class="nav-rail" aria-label="主导航">
+        <div class="nav-logo" title="OminiBerry草莓病害诊断与防治工作台">🍓</div>
+        <div class="nav-group">
+          <button class="nav-item active" data-page="dashboard" title="数据大屏">
+            <span class="nav-icon">📊</span>
+          </button>
+          <button class="nav-item" data-page="diagnosis" title="决策台">
+            <span class="nav-icon">🩺</span>
+          </button>
+          <button class="nav-item" data-page="runs" title="运行记录">
+            <span class="nav-icon">🗂️</span>
+          </button>
+          <button class="nav-item" data-page="cases" title="病例库">
+            <span class="nav-icon">🧪</span>
+          </button>
+          <button class="nav-item" data-page="kb" title="知识库">
+            <span class="nav-icon">📚</span>
+          </button>
+        </div>
+      </nav>
+
+      <div class="app-body">
+        <header class="top-bar">
+          <div class="top-bar-left">
+            <div class="top-heading">
+              <span class="top-system">OminiBerry草莓病害诊断与防治工作台</span>
+              <div class="top-breadcrumb">
+                <span class="top-sep">Plant Health Console</span>
+                <span class="top-page">数据大屏</span>
+              </div>
+            </div>
+          </div>
+          <div class="top-bar-center">
+            <div id="top-run-indicator" class="run-indicator idle">
+              <span class="indicator-dot"></span>
+              <span id="status" class="indicator-text">等待提交</span>
+            </div>
+          </div>
+          <div class="top-bar-right">
+            <div class="run-lookup">
+              <input id="run_id_lookup" type="text" placeholder="输入运行ID" />
+              <button id="load-btn" class="btn-sm" type="button">加载</button>
+            </div>
+          </div>
+        </header>
+
+        <div class="workspace" id="workspace">
+          <aside class="input-panel glass">
+            <div class="panel-hero">
+              <div class="hero-pattern"></div>
+              <div class="hero-content">
+                <div class="hero-kicker">Evidence-driven diagnosis workflow</div>
+                <h1>从叶片症状输入到救治报告生成的会诊流程</h1>
+                <p>你可以点击每个节点查看角色职责、输入证据、补证任务和阶段输出，按实际决策步骤追踪整条流程。</p>
+                <div class="hero-meta">
+                  <span class="ui-version">界面版本 {{ ui_version_text }}</span>
+                  <span class="hero-pill">救治决策流程</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="workspace-summary">
+              <div class="summary-card">
+                <span class="summary-label">当前模式</span>
+                <strong>图像直达诊断</strong>
+                <span class="summary-note">上传图片后自动完成视觉理解、会诊推理与报告生成。</span>
+              </div>
+              <div class="summary-card">
+                <span class="summary-label">输出结果</span>
+                <strong>流程 + 报告</strong>
+                <span class="summary-note">既能看诊断路径，也能直接查看最终建议。</span>
+              </div>
+            </div>
+
+            <div class="expert-team">
+              <span class="expert-team-label">专家角色面板</span>
+              <div class="expert-avatars">
+                <div class="expert-avatar ea-human" data-agent="human" title="人类输入"></div>
+                <div class="expert-avatar ea-teal" data-agent="diagnosis_evidence_officer" title="病理推理专家"></div>
+                <div class="expert-avatar ea-violet" data-agent="differential_officer" title="鉴别排除专家"></div>
+                <div class="expert-avatar ea-green" data-agent="cultivation_management_officer" title="农艺环境专家"></div>
+                <div class="expert-avatar ea-rose" data-agent="berry_qa_expert" title="草莓防治专家"></div>
+              </div>
+            </div>
+
+            <form id="run-form" class="input-form">
+              <input id="problem_name" name="problem_name" type="hidden" value="草莓病害图像诊断报告" />
+              <input id="case_text" name="case_text" type="hidden" value="" />
+
+              <div class="form-section-title">任务配置</div>
+
+              <div class="field field-note">
+                <label>诊断模式</label>
+                <div class="static-note">
+                  当前流程默认直接根据上传的草莓病害图片生成诊断与救治报告，不再需要额外输入用户问题。
+                </div>
+              </div>
+
+              <div class="row-2">
+                <div class="field">
+                  <label for="stage">处理阶段</label>
+                  <select id="stage" name="stage">
+                    <option value="initial">初诊</option>
+                    <option value="final">复核</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="n_rounds">会诊轮次</label>
+                  <input id="n_rounds" name="n_rounds" type="number" min="1" max="6" value="2" />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="image">病害图片</label>
+                <div class="file-upload-wrapper">
+                  <input id="image" name="image" type="file" accept="image/*" class="file-input" required />
+                  <label for="image" class="file-label">
+                    <span class="file-icon">🖼️</span>
+                    <span>上传草莓病害图片，系统将直接分析原图并生成诊断报告</span>
+                  </label>
+                </div>
+              </div>
+
+              <button id="submit-btn" type="submit" class="btn-primary">开始生成救治报告</button>
+            </form>
+
+            <div id="run-meta" class="run-meta-strip"></div>
+
+            <details class="danger-zone">
+              <summary>知识库维护</summary>
+              <p class="danger-desc">清理历史缓存会影响检索结果。除非你确定要重置数据，否则不要执行。</p>
+              <div class="danger-row">
+                <select id="kb-target">
+                  <option value="all">全部</option>
+                  <option value="verified">已核实病例</option>
+                  <option value="unverified">待核实病例</option>
+                  <option value="documents">知识文档</option>
+                </select>
+                <button id="clear-kb-btn" class="btn-danger btn-sm" type="button">清空</button>
+              </div>
+              <div id="kb-status" class="kb-status"></div>
+            </details>
+          </aside>
+
+          <main class="output-panel glass">
+            <div class="board-intro">
+              <div class="board-intro-copy">
+                <span class="board-intro-kicker">Decision Board</span>
+                <h2>诊断过程与输出结果在这里统一呈现</h2>
+                <p>左侧配置任务，中央查看流程白板与最终报告，保留全部功能但让信息层次更清楚。</p>
+              </div>
+            </div>
+
+            <div class="view-tabs">
+              <button id="dialogue-view-btn" class="view-tab active" type="button">
+                <span class="tab-icon">💬</span>
+                <span>会诊过程</span>
+              </button>
+              <button id="report-view-btn" class="view-tab" type="button">
+                <span class="tab-icon">📄</span>
+                <span>救治报告</span>
+              </button>
+            </div>
+
+            <div class="diagnosis-stage">
+              <section id="flow-board-view" class="flow-board-view">
+                <div class="flow-toolbar">
+                  <div class="flow-toolbar-copy">
+                    <div class="flow-toolbar-top-row">
+                      <button class="back-dash-btn" data-nav="dashboard" type="button" title="返回数据大屏">‹ 返回大屏</button>
+                      <span class="flow-toolbar-title">救治决策流程图</span>
+                    </div>
+                    <span class="flow-toolbar-text">用来查看全图。</span>
+                  </div>
+                  <div class="flow-toolbar-side">
+                    <div class="flow-legend">
+                      <span class="legend-pill legend-active">处理中</span>
+                      <span class="legend-pill legend-done">已完成</span>
+                      <span class="legend-pill legend-pending">待触发</span>
+                    </div>
+                    <div class="flow-toolbar-actions">
+                      <button id="flow-zoom-out-btn" class="btn-sm" type="button">缩小</button>
+                      <span id="flow-zoom-label" class="flow-zoom-label">100%</span>
+                      <button id="flow-zoom-in-btn" class="btn-sm" type="button">放大</button>
+                      <button id="flow-fit-btn" class="btn-sm" type="button">适配</button>
+                      <button id="flow-reset-btn" class="btn-sm" type="button">重置</button>
+                      <button id="flow-board-btn" class="btn-sm" type="button">白板查看</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flow-main">
+                  <div class="flow-canvas-shell">
+                    <div id="flow-canvas-scroll" class="flow-canvas-scroll">
+                      <div id="flow-canvas" class="flow-canvas">
+                        <svg id="flow-edges" class="flow-edges" aria-hidden="true"></svg>
+                        <div id="flow-board" class="flow-board"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <aside id="node-inspector" class="node-inspector">
+                    <div class="inspector-empty">
+                      <div class="inspector-empty-icon">🍓</div>
+                      <div class="inspector-empty-title">流程已就绪</div>
+                      <div class="inspector-empty-text">提交图片后，节点会按救治决策顺序依次激活。点击任一节点查看该角色的职责、证据与输出。</div>
+                    </div>
+                  </aside>
+                </div>
+              </section>
+
+              <section id="report-board" class="report-board"></section>
+            </div>
+          </main>
+        </div>
+
+        <div id="page-dashboard" class="dash-page" style="display: flex">
+          <div class="dash-grid">
+            <div class="dash-panel hero-panel" data-nav="diagnosis">
+              <div class="dash-panel-border">
+                <span class="dash-corner dash-corner-tl"></span>
+                <span class="dash-corner dash-corner-tr"></span>
+                <span class="dash-corner dash-corner-bl"></span>
+                <span class="dash-corner dash-corner-br"></span>
+                <span class="dash-scan-line-top"></span>
+                <span class="dash-scan-line-bottom"></span>
+              </div>
+              <div class="dash-panel-inner">
+                <div class="dash-panel-icon">🍓</div>
+                <div class="dash-panel-label">快速诊断入口</div>
+                <h2 class="dash-panel-title">草莓病害<br>智能诊断</h2>
+                <p class="dash-panel-desc">上传草莓叶片图片，AI 专家团队会诊，生成救治报告</p>
+                <div class="dash-panel-action">
+                  <span class="dash-cta">进入决策台 →</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-panel stats-panel">
+              <div class="dash-panel-border">
+                <span class="dash-corner dash-corner-tl"></span>
+                <span class="dash-corner dash-corner-tr"></span>
+                <span class="dash-corner dash-corner-bl"></span>
+                <span class="dash-corner dash-corner-br"></span>
+                <span class="dash-scan-line-top"></span>
+                <span class="dash-scan-line-bottom"></span>
+              </div>
+              <div class="dash-panel-inner">
+                <div class="dash-panel-label">系统概览</div>
+                <div class="dash-stats-row">
+                  <div class="dash-stat">
+                    <span class="dash-stat-value" id="dash-total-runs">--</span>
+                    <span class="dash-stat-label">诊断运行</span>
+                  </div>
+                  <div class="dash-stat">
+                    <span class="dash-stat-value accent" id="dash-verified-cases">--</span>
+                    <span class="dash-stat-label">已核实病例</span>
+                  </div>
+                </div>
+                <div class="dash-stats-row">
+                  <div class="dash-stat">
+                    <span class="dash-stat-value soft" id="dash-unverified-cases">--</span>
+                    <span class="dash-stat-label">待核实病例</span>
+                  </div>
+                  <div class="dash-stat">
+                    <span class="dash-stat-value muted" id="dash-doc-count">--</span>
+                    <span class="dash-stat-label">知识文档</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-panel team-panel">
+              <div class="dash-panel-border">
+                <span class="dash-corner dash-corner-tl"></span>
+                <span class="dash-corner dash-corner-tr"></span>
+                <span class="dash-corner dash-corner-bl"></span>
+                <span class="dash-corner dash-corner-br"></span>
+                <span class="dash-scan-line-top"></span>
+                <span class="dash-scan-line-bottom"></span>
+              </div>
+              <div class="dash-panel-inner">
+                <div class="dash-panel-label">专家团队就绪</div>
+                <div class="dash-expert-avatars">
+                  <div class="dash-avatar ea-human" title="人类输入">👤</div>
+                  <div class="dash-avatar ea-teal" title="病理推理专家">🔬</div>
+                  <div class="dash-avatar ea-violet" title="鉴别排除专家">🔍</div>
+                  <div class="dash-avatar ea-green" title="农艺环境专家">🌱</div>
+                  <div class="dash-avatar ea-rose" title="草莓防治专家">💊</div>
+                </div>
+                <p class="dash-panel-desc">5 位 AI 专家协同会诊，覆盖病理推理、鉴别排除、农艺环境与防治方案全流程</p>
+              </div>
+            </div>
+
+            <div class="dash-panel runs-panel" data-nav="runs">
+              <div class="dash-panel-border">
+                <span class="dash-corner dash-corner-tl"></span>
+                <span class="dash-corner dash-corner-tr"></span>
+                <span class="dash-corner dash-corner-bl"></span>
+                <span class="dash-corner dash-corner-br"></span>
+                <span class="dash-scan-line-top"></span>
+                <span class="dash-scan-line-bottom"></span>
+              </div>
+              <div class="dash-panel-inner">
+                <div class="dash-panel-label">运行记录 <span class="dash-nav-hint">点击进入 →</span></div>
+                <div id="dash-recent-runs" class="dash-list-preview">
+                  <div class="dash-list-empty">加载中...</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-panel cases-panel" data-nav="cases">
+              <div class="dash-panel-border">
+                <span class="dash-corner dash-corner-tl"></span>
+                <span class="dash-corner dash-corner-tr"></span>
+                <span class="dash-corner dash-corner-bl"></span>
+                <span class="dash-corner dash-corner-br"></span>
+                <span class="dash-scan-line-top"></span>
+                <span class="dash-scan-line-bottom"></span>
+              </div>
+              <div class="dash-panel-inner">
+                <div class="dash-panel-label">病例库 <span class="dash-nav-hint">点击进入 →</span></div>
+                <div class="dash-mini-stats">
+                  <div class="dash-mini-stat">
+                    <span class="dash-mini-val accent">✓</span>
+                    <span>已核实 <strong id="dash-cases-verified">--</strong></span>
+                  </div>
+                  <div class="dash-mini-stat">
+                    <span class="dash-mini-val muted">⏳</span>
+                    <span>待核实 <strong id="dash-cases-unverified">--</strong></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-panel kb-panel" data-nav="kb">
+              <div class="dash-panel-border">
+                <span class="dash-corner dash-corner-tl"></span>
+                <span class="dash-corner dash-corner-tr"></span>
+                <span class="dash-corner dash-corner-bl"></span>
+                <span class="dash-corner dash-corner-br"></span>
+                <span class="dash-scan-line-top"></span>
+                <span class="dash-scan-line-bottom"></span>
+              </div>
+              <div class="dash-panel-inner">
+                <div class="dash-panel-label">知识库管理 <span class="dash-nav-hint">点击进入 →</span></div>
+                <div class="dash-mini-stats">
+                  <div class="dash-mini-stat">
+                    <span class="dash-mini-val soft">📄</span>
+                    <span>文档 <strong id="dash-kb-docs">--</strong></span>
+                  </div>
+                  <div class="dash-mini-stat">
+                    <span class="dash-mini-val accent">📊</span>
+                    <span>总条目 <strong id="dash-kb-total">--</strong></span>
+                  </div>
+                </div>
+                <p class="dash-panel-desc">上传知识文档，管理病例数据</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="page-runs" class="side-page glass" style="display: none">
+          <div class="page-header">
+            <div class="page-header-left">
+              <button class="back-dash-btn" data-nav="dashboard" type="button" title="返回数据大屏">‹ 返回大屏</button>
+              <span class="page-icon">🗂️</span>
+              <div>
+                <h2 class="page-title">运行记录</h2>
+                <p class="page-subtitle">查看历史运行并重新加载到救治决策流程中</p>
+              </div>
+            </div>
+            <button id="runs-refresh-btn" class="btn-sm" type="button">刷新</button>
+          </div>
+          <div id="runs-list" class="page-list"></div>
+        </div>
+
+        <div id="page-cases" class="side-page glass" style="display: none">
+          <div class="page-header">
+            <div class="page-header-left">
+              <button class="back-dash-btn" data-nav="dashboard" type="button" title="返回数据大屏">‹ 返回大屏</button>
+              <span class="page-icon">🧪</span>
+              <div>
+                <h2 class="page-title">病例库</h2>
+                <p class="page-subtitle">查看沉淀到知识库的病例记录</p>
+              </div>
+            </div>
+            <div class="kb-tab-group">
+              <button class="kb-tab active" data-target="verified" type="button">
+                已核实<span id="cases-verified-count" class="tab-badge"></span>
+              </button>
+              <button class="kb-tab" data-target="unverified" type="button">
+                待核实<span id="cases-unverified-count" class="tab-badge"></span>
+              </button>
+            </div>
+          </div>
+          <div id="cases-list" class="page-list"></div>
+        </div>
+
+        <div id="page-kb" class="side-page glass" style="display: none">
+          <div class="page-header">
+            <div class="page-header-left">
+              <button class="back-dash-btn" data-nav="dashboard" type="button" title="返回数据大屏">‹ 返回大屏</button>
+              <span class="page-icon">📚</span>
+              <div>
+                <h2 class="page-title">知识库</h2>
+                <p class="page-subtitle">查看案例统计与数据维护入口</p>
+              </div>
+            </div>
+          </div>
+
+          <div id="kb-page-scroll" class="page-scroll">
+            <div id="kb-stats-area" class="kb-stats-grid"></div>
+
+            <div class="page-header page-header-inline">
+              <div class="page-header-left">
+                <span class="page-inline-title">上传知识条目</span>
+              </div>
+            </div>
+
+            <form id="kb-upload-form" class="kb-upload-form">
+              <div class="kb-upload-grid">
+                <div class="field">
+                  <label for="kb-upload-title">标题</label>
+                  <input id="kb-upload-title" type="text" placeholder="例如：温室环境失衡处置要点" />
+                </div>
+
+                <div class="field field-wide">
+                  <label for="kb-upload-text">纯文本</label>
+                  <textarea
+                    id="kb-upload-text"
+                    rows="6"
+                    placeholder="直接粘贴知识内容，或下方选择 .txt / .md / .markdown 文件。"
+                  ></textarea>
+                </div>
+
+                <div class="field field-wide">
+                  <label for="kb-upload-file">文件上传</label>
+                  <div class="file-upload-wrapper">
+                    <input
+                      id="kb-upload-file"
+                      type="file"
+                      accept=".txt,.md,.markdown,text/plain,text/markdown"
+                      class="file-input"
+                    />
+                    <label for="kb-upload-file" class="file-label">
+                      <span class="file-icon">📎</span>
+                      <span>支持 .txt、.md、.markdown</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="kb-upload-actions">
+                <button id="kb-upload-btn" class="btn-primary btn-primary-compact" type="submit">上传到知识库</button>
+              </div>
+              <div id="kb-upload-status" class="kb-status kb-status-page"></div>
+            </form>
+
+            <div class="page-header page-header-inline">
+              <div class="page-header-left">
+                <span class="page-inline-title">已上传文档</span>
+              </div>
+            </div>
+
+            <div id="kb-docs-list" class="kb-doc-list"></div>
+
+            <div class="page-header page-header-inline">
+              <div class="page-header-left">
+                <span class="page-inline-title">数据清理</span>
+              </div>
+            </div>
+
+            <div class="kb-clear-section">
+              <select id="kb-target2" class="kb-select">
+                <option value="all">清空全部</option>
+                <option value="verified">仅清空已核实病例</option>
+                <option value="unverified">仅清空待核实病例</option>
+                <option value="documents">仅清空知识文档</option>
+              </select>
+              <button id="clear-kb-btn2" class="btn-danger btn-sm" type="button">清空</button>
+            </div>
+            <div id="kb-status2" class="kb-status kb-status-page"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/static/app.js?v={{ static_version }}"></script>
+  </body>
+</html>

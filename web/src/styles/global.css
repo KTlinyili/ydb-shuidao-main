@@ -1,0 +1,128 @@
+/* 稻影知微 全局样式：企业级后台基调 */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  color: #2b333a;
+  background: #f4f6f5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 通用卡片密度与悬停微调 */
+.ant-card .ant-card-head {
+  border-bottom-color: #f0f2f1;
+  min-height: 46px;
+}
+.ant-card-hoverable {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.ant-card-hoverable:hover {
+  box-shadow: 0 4px 14px rgba(24, 35, 30, 0.07);
+  transform: translateY(-1px);
+}
+
+/* 滚动条克制化 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #d3d9d6;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b9c2bd;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 页面标题条 */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.page-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #1f262b;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+.page-subtitle {
+  font-size: 12px;
+  color: #8b96a0;
+  margin-top: 3px;
+}
+
+/* 指标数值等宽数字 */
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+/* 状态点 */
+.status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.status-dot.online {
+  background: #3d8b5f;
+}
+.status-dot.offline {
+  background: #b9c2bd;
+}
+.status-dot.fault {
+  background: #c05621;
+}
+.status-dot.pulse {
+  animation: status-pulse 1.6s ease-in-out infinite;
+}
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* 会诊时间线内的要点列表 */
+.agent-fields .agent-field-item {
+  padding-left: 14px;
+  position: relative;
+  color: #4a5560;
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+.agent-fields .agent-field-item::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 9px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #9db3a7;
+}
+
+/* 知识库正文排版 */
+.doc-body p {
+  margin: 0 0 8px;
+  color: #3d474f;
+  line-height: 1.8;
+  font-size: 13px;
+}
