@@ -24,6 +24,8 @@ from app.core.retrieval.reranker_client import RerankerClient
 from app.core.storage.case_library import CaseLibrary
 from app.core.storage.run_store import RunStore
 from app.core.vision.dinov3_service import DinoV3Paths, LocalDinoV3Diagnoser
+from app.core.vision.yolo_service import YoloDiagnoser
+from app.core.vision.yolo_cls_service import YoloClassifier
 from app.core.vision.merged_result import build_vision_result
 from app.core.vision.presentation import build_image_analysis_display
 
@@ -47,6 +49,7 @@ class DiagnosisPipeline:
         )
         self.qwen_caption_provider = self._build_qwen_caption_provider(settings)
         self.image_diagnoser = self._build_image_diagnoser(settings)
+        self.classifier = self._build_classifier(settings)
         llm_client = build_llm_client(settings)
         agent_model_routing = build_agent_model_routing(settings)
         self.orchestrator = MultiAgentOrchestrator(
@@ -380,7 +383,11 @@ class DiagnosisPipeline:
         )
         return provider if provider.is_available() else None
 
-    def _build_image_diagnoser(self, settings: Settings) -> LocalDinoV3Diagnoser | None:
+    def _build_image_diagnoser(self, settings: Settings) -> LocalDinoV3Diagnoser | YoloDiagnoser | None:
+        project_root = Path(__file__).resolve().parent.parent.parent
+        yolo_model = project_root / "app" / "models" / "best.pt"
+        if yolo_model.exists():
+            return YoloDiagnoser.from_project_root(project_root)
         if not settings.enable_local_dinov3:
             return None
         classifier_classes: tuple[str, ...] = ()
@@ -404,6 +411,13 @@ class DiagnosisPipeline:
             )
         )
 
+    def _build_classifier(self, settings: Settings) -> YoloClassifier | None:
+        project_root = Path(__file__).resolve().parent.parent.parent
+        cls_model = project_root / "app" / "models" / "best_cls.pt"
+        if cls_model.exists():
+            return YoloClassifier.from_project_root(project_root)
+        return None
+
     def _migrate_legacy_cases_if_needed(self) -> None:
         current_cases = self.case_library.load_all_cases()
         if current_cases.get("total_verified", 0) or current_cases.get("total_unverified", 0):
@@ -423,10 +437,29 @@ class DiagnosisPipeline:
 
     def _analyze_image(self, image_bytes: bytes | None) -> dict[str, Any] | None:
         if not image_bytes or self.image_diagnoser is None:
+            # 即使没有检测模型，也尝试用分类模型
+            if image_bytes and self.classifier and self.classifier.is_available():
+                cls_result = self.classifier.classify_image_bytes(image_bytes)
+                return {
+                    "detection": None,
+                    "classification": cls_result,
+                    "predicted_class": cls_result["predicted_class"],
+                    "predicted_class_en": cls_result["predicted_class_en"],
+                    "confidence": cls_result["confidence"],
+                }
             return None
         if not self.image_diagnoser.is_available():
             return None
-        return self.image_diagnoser.analyze_image_bytes(image_bytes)
+        detection_result = self.image_diagnoser.analyze_image_bytes(image_bytes)
+        # 同时运行分类模型
+        cls_result = None
+        if self.classifier and self.classifier.is_available():
+            try:
+                cls_result = self.classifier.classify_image_bytes(image_bytes)
+            except Exception:
+                cls_result = None
+        detection_result["classification"] = cls_result
+        return detection_result
 
     def _extract_slot_extraction(
         self,

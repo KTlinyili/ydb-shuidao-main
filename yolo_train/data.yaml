@@ -1,0 +1,27 @@
+# YOLOv8 数据集配置 - 水稻病虫害15类
+# 路径用相对路径，和 train.py 放在同一目录下运行即可
+
+path: ./dataset  # 数据集根目录（上传后改成实际路径）
+train: train/images
+val: val/images
+test: test/images
+
+nc: 15
+
+names: [
+    'Bhopper',        # 0  褐飞虱
+    'Ghopper',        # 1  灰飞虱
+    'Folder',         # 2  稻纵卷叶螟
+    'Rice-bug',       # 3  稻蝽
+    'Stem-borer',     # 4  二化螟
+    'Whorl-maggot',   # 5  稻瘿蚊
+    'False-smut',     # 6  假黑穗病
+    'Sheath-blight',  # 7  纹枯病
+    'Streak',         # 8  条纹叶枯病
+    'Tungro',         # 9  草丛矮缩病
+    'Blast',          # 10 稻瘟病
+    'Blight',         # 11 白叶枯病
+    'Brown-spot',     # 12 餐斑病
+    'Dead-heart',     # 13 枯心苗
+    'Downy-mildew'    # 14 霜霉病
+]

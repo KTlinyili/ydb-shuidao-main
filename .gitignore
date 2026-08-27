@@ -24,6 +24,13 @@ _error_logs/
 *.rknn
 *.pt
 
+# 训练数据与临时文件
+yolo_train/rice_cls/
+yolo_train/raw_data/
+yolo_train/*.zip
+yolo_train/*.part
+yolo_train/yolov8n-cls.pt
+
 # 系统文件
 .DS_Store
 Thumbs.db
