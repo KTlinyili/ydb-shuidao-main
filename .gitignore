@@ -20,9 +20,9 @@ _error_logs/
 
 # 数据库与模型权重（按需放开）
 *.db
-*.onnx
 *.rknn
-*.pt
+app/models/best.pt
+app/models/best.onnx
 
 # 训练数据与临时文件
 yolo_train/rice_cls/
