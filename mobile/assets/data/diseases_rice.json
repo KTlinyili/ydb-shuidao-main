@@ -1,0 +1,46 @@
+[
+  {
+    "key": "brown_spot",
+    "name": "褐斑病",
+    "name_en": "Brown Spot",
+    "keywords": ["褐色斑点", "褐斑", "叶斑", "枯黄", "椭圆斑"],
+    "symptoms": "叶片出现褐色椭圆形小斑点，逐渐扩大形成不规则病斑，病斑中央灰白色，边缘褐色。严重时叶片枯黄。",
+    "treatment": "1. 喷施咪鲜胺或苯醚甲环唑杀菌剂\n2. 清除病叶减少侵染源\n3. 改善田间通风条件",
+    "prevention": "1. 选用抗病品种\n2. 合理施肥避免偏施氮肥\n3. 田间保持适当湿度\n4. 播种前种子消毒处理",
+    "risk_level": "medium",
+    "favorable_conditions": "高温高湿、氮肥过量、土壤缺硅"
+  },
+  {
+    "key": "leaf_blast",
+    "name": "稻叶瘟",
+    "name_en": "Leaf Blast",
+    "keywords": ["叶瘟", "梭形斑", "褐绿", "急性型", "慢性型", "稻瘟"],
+    "symptoms": "叶片出现褐色梭形病斑，中央灰白色，边缘黄褐色。急性型病斑暗绿色，慢性型病斑灰白色。严重时全叶枯死。",
+    "treatment": "1. 立即喷施稻瘟灵或吡唑醚菌酯\n2. 减少氮肥施用\n3. 田间排水晒田",
+    "prevention": "1. 选用抗瘟品种\n2. 合理施用氮肥\n3. 适时晒田\n4. 种子处理预防初侵染",
+    "risk_level": "high",
+    "favorable_conditions": "20-28°C、湿度90%以上、雾露天气"
+  },
+  {
+    "key": "neck_blast",
+    "name": "穗颈瘟",
+    "name_en": "Neck Blast",
+    "keywords": ["穗颈", "穗瘟", "白穗", "颈瘟", "穗颈变褐"],
+    "symptoms": "穗颈变褐色腐烂，导致白穗或半白穗。严重时整穗枯白，谷粒不充实。是水稻最严重的病害之一。",
+    "treatment": "1. 紧急喷施稻瘟灵\n2. 对周边田块进行预防性施药\n3. 及时收割减少损失",
+    "prevention": "1. 穗期预防性施药\n2. 选用抗病品种\n3. 控制后期氮肥\n4. 破口期和齐穗期各喷药一次",
+    "risk_level": "critical",
+    "favorable_conditions": "抽穗期阴雨多雾、20°C左右、湿度高"
+  },
+  {
+    "key": "healthy",
+    "name": "健康",
+    "name_en": "Healthy",
+    "keywords": ["健康", "正常", "无病", "良好"],
+    "symptoms": "叶片绿色，无明显病斑，生长正常。",
+    "treatment": "无需治疗，继续保持良好管理。",
+    "prevention": "1. 继续监测环境条件\n2. 定期巡田\n3. 保持合理水肥管理",
+    "risk_level": "low",
+    "favorable_conditions": "环境条件适宜"
+  }
+]

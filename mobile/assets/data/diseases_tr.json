@@ -1,0 +1,646 @@
+{
+  "dsAppleScab": {
+    "symptoms": [
+      "Yaprak altlarında ve meyvelerde kadifemsi, zeytin yeşili veya kahverengi dairesel lekeler oluşur.",
+      "Şiddetli enfeksiyonlarda yapraklar bükülür, sararır ve erkenden dökülür.",
+      "Meyvelerde şekil bozuklukları, çatlamalar ve 'iğne ucu' adı verilen küçük lekeler meydana gelir."
+    ],
+    "treatment": [
+      "Hastalık riskinin yüksek olduğu pembe tomurcuk döneminde düzenli mantar ilacı (fungisit) uygulaması yapın.",
+      "Direnç gelişimini önlemek için farklı etki mekanizmasına sahip ilaçları dönüşümlü olarak kullanın.",
+      "Enfekte olmuş yaprak ve meyveleri toplayıp imha ederek bahçe hijyenini sağlayın."
+    ],
+    "prevention": [
+      "Hastalığa genetik olarak dirençli elma çeşitlerini tercih edin.",
+      "Sonbaharda dökülen yapraklara %5'lik üre çözeltisi uygulayarak yaprakların hızlı çürümesini sağlayın.",
+      "Ağaçların hava almasını ve yaprakların hızlı kurumasını sağlayacak budama işlemleri yapın."
+    ]
+  },
+  "dsAppleBlackRot": {
+    "symptoms": [
+      "Yapraklarda mor kenarlı, ortası açık kahverengi 'kurbağa gözü' görünümünde dairesel lekeler belirir.",
+      "Meyvede genellikle çiçek çukurundan başlayan, sert, siyahlaşan ve eşmerkezli halkalar oluşturan çürümeler görülür.",
+      "Meyveler ağaç üzerinde kuruyarak büzüşür ve 'mumyalaşmış' şekilde asılı kalır."
+    ],
+    "treatment": [
+      "Mantarın kışladığı mumyalaşmış meyveleri, ölü dalları ve kanserli bölgeleri budayarak temizleyin.",
+      "Gümüş uç döneminden hasada kadar, özellikle yağışlı dönemlerde Captan veya kükürt gibi uygun fungisitler uygulayın.",
+      "Ateş yanıklığı enfeksiyonu olan sürgünleri hemen budayın, çünkü bu bölgeler mantar için giriş kapısıdır."
+    ],
+    "prevention": [
+      "Ağaçların hava almasını ve hızlı kurumasını sağlamak için yıllık budama yapın.",
+      "Kesilen hastalıklı dalları ve dökülen yaprakları bahçeden uzaklaştırın, yakın veya gömün.",
+      "Ağaçları stresten uzak tutarak (sulama, gübreleme) kanser oluşumuna karşı dirençli hale getirin."
+    ]
+  },
+  "dsAppleCedarRust": {
+    "symptoms": [
+      "Yaprak üst yüzeylerinde küçük, soluk sarı-turuncu lekeler, alt yüzeylerde ise turuncu çıkıntılar oluşur.",
+      "Meyvelerin çiçek çukurunda (kaliks) yüzeysel, geniş lekeler ve ciddi şekil bozuklukları meydana gelir.",
+      "Şiddetli enfeksiyonlarda yapraklar erkenden sararır ve dökülür."
+    ],
+    "treatment": [
+      "Belirtiler görüldükten sonra tedavi imkansızdır; koruyucu olarak pembe tomurcuk döneminden itibaren ilaçlama yapılmalıdır.",
+      "Mancozeb veya FRAC 3 grubu ilaçlar koruyucu olarak uygulanabilir.",
+      "Organik tarımda bu hastalık için etkili bir kimyasal tedavi seçeneği ne yazık ki bulunmamaktadır."
+    ],
+    "prevention": [
+      "Hastalığın yaşam döngüsünü kırmak için bahçe çevresindeki Kızıl Sedir (Red Cedar) ağaçlarını kesip uzaklaştırın.",
+      "Pas hastalığına karşı genetik olarak dayanıklı elma çeşitlerini tercih edin."
+    ]
+  },
+  "dsCherryPowderyMildew": {
+    "symptoms": [
+      "Enfekte olan yapraklar yukarı doğru kıvrılır ve şekil bozukluğu gösterir.",
+      "Yeni çıkan yapraklar giderek küçülür, soluklaşır ve sürgünler normalden kısa kalır.",
+      "Mevsim ortasında yapraklar ve sürgünler üzerinde beyazımsı, tozlu bir mantar tabakası görülür."
+    ],
+    "treatment": [
+      "Kimyasal mücadeleye taç yaprak dökümünden (petal fall) geç olmamak kaydıyla başlayın ve hasada kadar devam edin.",
+      "Hastalık gelişimi sırasında FRAC 3, 7 ve 11 grubu fungisitleri (veya karışımlarını) uygulayın.",
+      "Sadece külleme hastalığına özel olan Quintec veya Vivando gibi ürünleri kullanın."
+    ],
+    "prevention": [
+      "Ağaçlar arasında iyi bir hava sirkülasyonu sağlamak için düzenli budama yapın.",
+      "Bahçedeki nem oranını düşürmek için çimleri (veya örtü bitkilerini) kısa tutun ve sık biçin.",
+      "Hastalığı teşvik eden gölgeli ve sabah sisi oluşan bölgelerde daha dikkatli gözlem yapın."
+    ]
+  },
+  "dsCornCercospora": {
+    "symptoms": [
+      "Yapraklarda damarlar tarafından sınırlandırılmış, dikdörtgen şeklinde (kibrit çöpü gibi) gri veya ten rengi lekeler oluşur.",
+      "Lekeler olgunlaştıkça grileşir ve birleşerek yaprağın büyük kısmını kurutur (yaprak yanıklığı).",
+      "Hastalık genellikle alt yapraklardan başlar ve nemli havalarda hızla üst yapraklara ilerler."
+    ],
+    "treatment": [
+      "Hastalık eşiği aşıldığında, püskül çıkarma (VT) ile tepe püskülü (R1) dönemleri arasında ilaçlama yapın.",
+      "Strobilurin veya Triazol grubu fungisitler bu hastalıkta etkilidir.",
+      "Mantar bitki artıklarında yaşadığı için derin sürüm yaparak artıkları gömmek inokulumu azaltır."
+    ],
+    "prevention": [
+      "Gri Yaprak Lekesine karşı genetik olarak dirençli mısır hibritlerini seçmek en etkili yöntemdir.",
+      "En az 1-2 yıl mısır ekilmeyen bir münavebe (rotasyon) planı uygulayın.",
+      "Hava sirkülasyonunu engelleyen sık ekimden kaçının."
+    ]
+  },
+  "dsCornCommonRust": {
+    "symptoms": [
+      "Yaprakların her iki yüzeyinde (hem alt hem üst) tarçın kahverengisi, kabarık ve dairesel püstüller oluşur.",
+      "Püstüller olgunlaştığında patlar ve pas renginde tozlu sporlar açığa çıkar; sezon sonunda siyaha döner.",
+      "Hastalık genellikle serin ve nemli havalarda ortaya çıkarak bitkinin fotosentez alanını daraltır."
+    ],
+    "treatment": [
+      "Çoğu durumda bu hastalık ekonomik zarar eşiğini aşmaz ve ilaçlama gerektirmez.",
+      "Enfeksiyon çok erken dönemde başlarsa Strobilurin veya Triazol grubu fungisitler uygulanabilir.",
+      "Güney Pası (Southern Rust) ile karıştırılmamalıdır; Güney Pası daha tehlikelidir."
+    ],
+    "prevention": [
+      "En etkili yöntem, Yaygın Pas hastalığına karşı genetik direnci yüksek mısır hibritlerini ekmektir.",
+      "Geç ekim yapmaktan kaçının; geç ekilen mısırlar spor yoğunluğuna daha fazla maruz kalır.",
+      "Toprak analizi ve dengeli gübreleme ile bitkinin genel direncini artırın."
+    ]
+  },
+  "dsCornNorthernBlight": {
+    "symptoms": [
+      "Yapraklarda 3-15 cm uzunluğunda, grimsi-yeşil, karakteristik 'puro' veya 'mekik' şeklinde lekeler oluşur.",
+      "Hastalık ilerledikçe bu lekeler birleşerek yaprağın tamamını kurutur ve yanıklık (blight) görüntüsü verir.",
+      "Nemli havalarda lekelerin ortasında zeytin yeşili veya siyahımsı spor tabakası görülebilir."
+    ],
+    "treatment": [
+      "Püskül çıkarma (VT) ile tepe püskülü (R1) dönemleri arasında hastalık görülürse fungisit uygulayın.",
+      "Hasat sonrası derin sürüm yaparak bitki artıklarını toprağa gömmek enfeksiyon riskini azaltır.",
+      "Hastalık fotosentez alanını yok ettiği için erken müdahale verim kaybını önler."
+    ],
+    "prevention": [
+      "NCLB'ye karşı spesifik direnç genleri (Ht genleri) taşıyan hibrit mısır tohumlarını ekin.",
+      "Mısır art arda ekilmemeli, en az 1 yıl soya veya başka bir ürünle münavebe yapılmalıdır.",
+      "Tarladaki hava sirkülasyonunu artırmak için ekim sıklığına dikkat edin."
+    ]
+  },
+  "dsGrapeBlackRot": {
+    "symptoms": [
+      "Yaprakların üst yüzeyinde kırmızımsı-kahverengi, dairesel lekeler ve lekelerin çevresinde koyu bir halka oluşur.",
+      "Lekelerin ortasında zamanla küçük, siyah, sivilce benzeri mantar yapıları (piknitler) belirir.",
+      "Enfekte olan meyveler kararır, büzüşür, sertleşerek 'mumya' haline gelir ve salkımda asılı kalır."
+    ],
+    "treatment": [
+      "Mantar kışı mumyalaşmış meyvelerde geçirdiği için bunları mutlaka budayıp yakın veya gömün.",
+      "Hastalık riskinin yüksek olduğu yıllarda, erken dönemden meyveler renk değiştirene kadar fungisit uygulayın.",
+      "Yaprakların ıslak kalma süresi enfeksiyonu tetiklediği için ilaçlama programını hava durumuna göre ayarlayın."
+    ],
+    "prevention": [
+      "Siyah çürüklüğe dayanıklı üzüm çeşitlerini tercih ederek dikim yapın.",
+      "Asmaların iç kısımlarının hava almasını ve güneş görmesini sağlayacak budama yöntemleri uygulayın.",
+      "İlkbahar büyümesi başlamadan önce bahçedeki tüm hastalıklı artıkları temizleyin."
+    ]
+  },
+  "dsGrapeEsca": {
+    "symptoms": [
+      "Yapraklarda damarlar arasında sarı veya kırmızı renkte nekrotik şeritler oluşarak 'kaplan çizgisi' görünümü verir.",
+      "Meyvelerde koyu mor bir halkayla çevrili küçük, yuvarlak, siyah noktalar ('siyah kızamık') oluşur.",
+      "Şiddetli vakalarda asma aniden kuruyabilir (apopleksi) veya yapraklarını tamamen dökebilir."
+    ],
+    "treatment": [
+      "Hastalık gövdenin içindeki odunda yerleştiği için kimyasal ilaçlamayla tam tedavi mümkün değildir.",
+      "Budama yaralarını korumak için, budamadan hemen sonra bor içeren boyalar veya macunlar uygulayın.",
+      "Budama sırasında 'çift budama' (double pruning) tekniğini uygulayarak enfeksiyon riskini azaltın."
+    ],
+    "prevention": [
+      "Budama işlemini yağmurlu havalarda yapmaktan kaçının, çünkü sporlar yağmurla yayılır.",
+      "Hastalıklı ve verimsiz asmaların enfekte olmuş gövde kısımlarını kesip bahçeden uzaklaştırın.",
+      "Asmaları su ve besin stresi altında bırakmayarak güçlü kalmalarını sağlayın."
+    ]
+  },
+  "dsGrapeLeafBlight": {
+    "symptoms": [
+      "Yapraklarda başlangıçta donuk kırmızı-kahverengi olan, zamanla siyaha dönen düzensiz lekeler oluşur.",
+      "Lekelerin ortasında kuruma meydana gelir ve bu kısımlar dökülerek yaprakta delikli bir görünüm bırakır.",
+      "Şiddetli enfeksiyonlarda yapraklar tamamen kuruyup erkenden dökülür, bu da asmayı zayıflatır."
+    ],
+    "treatment": [
+      "Mancozeb, bakır bazlı fungisitler veya Bordo bulamacı bu hastalığa karşı etkilidir.",
+      "İlaçlamaya sürgünler 5-10 cm boya ulaştığında başlanmalı ve hasat sonrasına kadar devam edilmelidir.",
+      "Mücadeleye erken başlamak, hastalığın yayılmasını engellemek için kritiktir."
+    ],
+    "prevention": [
+      "Hastalık nemli ortamı sevdiği için asma tacının hava almasını sağlayacak budama işlemleri yapın.",
+      "Kışın yere dökülen enfekte yaprakları toplayıp yok ederek hastalığın bir sonraki yıla geçmesini engelleyin."
+    ]
+  },
+  "dsOrangeHLB": {
+    "symptoms": [
+      "Yapraklarda damar aralarında asimetrik, sarı-yeşil benekler (blotchy mottle) oluşur.",
+      "Meyveler olgunlaşsa bile alt kısımları yeşil kalır, şekil bozukluğu görülür ve tadı acılaşır.",
+      "Ağaçta sarı sürgünler oluşur, zamanla dal kurumaları başlar ve ağaç birkaç yıl içinde ölür."
+    ],
+    "treatment": [
+      "Hastalığın bilinen bir tedavisi yoktur; enfekte olan ağaçlar sökülüp imha edilmelidir.",
+      "Enfeksiyonu yayan 'Asya Turunçgil Psillidi' ile mücadele etmek için onaylı insektisitler kullanın.",
+      "Ağaçların ömrünü uzatmak için yapraktan yoğun besin takviyesi uygulanabilir ancak bu kesin çözüm değildir."
+    ],
+    "prevention": [
+      "Hastalığı taşıyan böcekleri engellemek için sadece sertifikalı, kapalı alanlarda yetiştirilmiş fidanlar kullanın.",
+      "Bahçenizde düzenli olarak böcek kontrolü yapın ve vektör psillidleri gördüğünüzde mücadele başlatın.",
+      "Enfekte olduğundan şüphelendiğiniz ağaçları PCR testi ile doğrulayıp hemen bahçeden uzaklaştırın."
+    ]
+  },
+  "dsPeachBacterialSpot": {
+    "symptoms": [
+      "Yapraklarda köşeli, morumsu-siyah lekeler oluşur ve bu lekelerin ortası dökülerek 'saçma deliği' görünümü verir.",
+      "Meyvelerde kabuk çatlar, derin çukurlar oluşur ve bu yaralardan zamk sızıntısı görülür.",
+      "Ciddi enfeksiyonlarda yapraklar erkenden sararıp dökülür, bu da meyve kalitesini düşürür."
+    ],
+    "treatment": [
+      "Tomurcuk kabarmasından çiçeklenmeye kadar olan dönemde bakır içerikli bileşikler uygulayın.",
+      "Çiçeklenme sonrası dönemde bakır yerine Oksitetrasiklin veya uygun antibiyotik içerikli ilaçlar kullanın.",
+      "Durgun dönemde 'bordo bulamacı' uygulaması bakteri popülasyonunu azaltmaya yardımcı olur."
+    ],
+    "prevention": [
+      "Bakteriyel lekeye genetik olarak dirençli şeftali çeşitlerini tercih etmek en etkili yöntemdir.",
+      "Rüzgarkıran dikerek rüzgarın ve kumun yapraklarda oluşturduğu mikro yaraları engelleyin.",
+      "Aşırı azot gübrelemesinden kaçının, çünkü hızlı büyüyen sürgünler hastalığa daha duyarlıdır."
+    ]
+  },
+  "dsPepperBacterialSpot": {
+    "symptoms": [
+      "Yapraklarda başlangıçta sulu görünümlü, zamanla koyu kahverengi veya siyaha dönen düzensiz lekeler oluşur.",
+      "Meyveler üzerinde kahverengi, kabarık, siğil benzeri pürüzlü lekeler meydana gelir.",
+      "İleri safhalarda yapraklar sararır ve erkenden dökülür, bu da meyvelerin güneşte yanmasına neden olur."
+    ],
+    "treatment": [
+      "Hastalık görüldüğünde Bakır içerikli ilaçları Mancozeb ile karıştırarak uygulayın.",
+      "Tarlada bitkiler ıslakken kesinlikle çalışmayın, çünkü bakteri suyla çok hızlı yayılır.",
+      "Enfekte olmuş bitkileri hemen söküp tarladan uzaklaştırın ve imha edin."
+    ],
+    "prevention": [
+      "En etkili yöntem, 'Bakteriyel Leke' ırklarına karşı sertifikalı ve dayanıklı tohum çeşitleri kullanmaktır.",
+      "Ekim öncesi tohumlara sıcak su uygulaması veya klor banyosu yaparak tohumdaki bakteriyi öldürün.",
+      "Biber ve domatesi aynı tarlaya art arda ekmeyin, en az 2-3 yıl münavebe uygulayın."
+    ]
+  },
+  "dsPotatoEarlyBlight": {
+    "symptoms": [
+      "Yaşlı alt yapraklarda, iç içe geçmiş halkalar şeklinde, koyu kahverengi 'hedef tahtası' lekeleri oluşur.",
+      "Lekelerin etrafında genellikle sarı bir hale bulunur; zamanla yaprak tamamen sararır ve kurur.",
+      "Yumrularda koyu renkli, çökük, kösele gibi sert ve kuru çürük lekeler meydana gelir."
+    ],
+    "treatment": [
+      "Hastalık belirtileri görülmeden önce koruyucu olarak Mancozeb veya Chlorothalonil içerikli fungisitler uygulayın.",
+      "Hastalık başladığında, sistemik fungisitlere geçin ve ilaçları dönüşümlü kullanın.",
+      "Hasattan en az 2 hafta önce bitki saplarını öldürmek, yumru enfeksiyonunu azaltır."
+    ],
+    "prevention": [
+      "Patates, domates veya patlıcan gibi aynı familyadan bitkileri en az 3-4 yıl aynı tarlaya ekmeyin.",
+      "Bitkiyi strese sokmamak için düzenli sulama yapın ve azot gübrelemesini dengeli tutun.",
+      "Hasat sonrası tarlada kalan bitki artıklarını temizleyin veya derin sürüm yapın."
+    ]
+  },
+  "dsPotatoLateBlight": {
+    "symptoms": [
+      "Yapraklarda soluk yeşil, sulu görünümlü büyük lekeler oluşur; nemli havalarda hızla kararıp ölür.",
+      "Nemli sabahlarda yaprak altlarında beyaz, pamuksu bir küf tabakası (miselyum) görülür.",
+      "Yumrularda kabuk altında kırmızımsı-kahverengi, granüllü ve sert bir çürüme yapar."
+    ],
+    "treatment": [
+      "Hastalık görüldüğü an, Chlorothalonil veya Mancozeb gibi koruyucu fungisitler hemen uygulanmalıdır.",
+      "Enfeksiyon yayılmışsa, oomisetlere özel sistemik fungisitlere geçilmeli ve direnç yönetimi yapılmalıdır.",
+      "Hasattan 2-3 hafta önce, yumrulara bulaşmayı önlemek için tarladaki tüm yeşil aksam kurutulmalıdır."
+    ],
+    "prevention": [
+      "Mutlaka sertifikalı ve hastalıktan ari tohumluk patates kullanın.",
+      "Tarlanın kenarına atılan atık patates yığınlarını yok edin, hastalık genelde buradan başlar.",
+      "Hava sirkülasyonunu artırmak için sıra aralarını geniş tutun ve aşırı sulamadan kaçının."
+    ]
+  },
+  "dsSquashPowderyMildew": {
+    "symptoms": [
+      "Yaprakların hem alt hem üst yüzeyinde, saplarda ve gövdede beyaz, pudra şekeri benzeri tozlu bir tabaka oluşur.",
+      "Enfekte yapraklar zamanla sararır, kahverengiye döner, kurur ve gevrek bir hal alır.",
+      "Yapraklar döküldüğü için korumasız kalan meyveler güneşte yanar ve kalitesi düşer."
+    ],
+    "treatment": [
+      "Belirtiler görülür görülmez Kükürt, Neem yağı veya Potasyum Bikarbonat içerikli ilaçlar uygulayın.",
+      "Kimyasal mücadelede sistemik fungisitler kullanılabilir ancak direnç gelişimine dikkat edilmelidir.",
+      "Kükürt uygularken sıcaklığın 32°C üzerinde olmamasına dikkat edin, aksi takdirde yapraklar yanabilir."
+    ],
+    "prevention": [
+      "Küllemeye dirençli (PMR) tohum çeşitlerini tercih etmek en kolay çözümdür.",
+      "Bitkiler arasında geniş mesafe bırakarak hava sirkülasyonunu artırın.",
+      "Tarlayı veya bahçeyi yabani otlardan temiz tutun, çünkü bu otlar mantar için kışlak görevi görür."
+    ]
+  },
+  "dsStrawberryLeafScorch": {
+    "symptoms": [
+      "Yapraklarda çok sayıda küçük, düzensiz mor lekeler oluşur; bu lekelerin ortası beyazlaşmaz.",
+      "Lekeler zamanla büyüyüp birleşerek yaprağa kırmızımsı-kahverengi, yanmış bir görünüm verir.",
+      "Şiddetli vakalarda yaprak kenarları yukarı doğru kıvrılır ve yaprak kurumuş bir kupa şeklini alır."
+    ],
+    "treatment": [
+      "Çiçeklenme döneminden hasada kadar Captan veya Thiram içerikli koruyucu fungisitler uygulanabilir.",
+      "Hasattan hemen sonra tarladaki eski yaprakları biçmek ve uzaklaştırmak enfeksiyon kaynağını yok eder.",
+      "Enfekte olmuş yaprakları asla tarlada bırakmayın, mantar kışı bu ölü yapraklarda geçirir."
+    ],
+    "prevention": [
+      "Bölgenize uygun ve Yaprak Yanıklığına dayanıklı çilek çeşitlerini tercih edin.",
+      "Yabancı otları temizleyerek ve dikim sıklığını ayarlayarak hava sirkülasyonunu artırın.",
+      "Mümkünse damla sulama kullanın; yağmurlama sulama hastalığı yayar."
+    ]
+  },
+  "dsTomatoBacterialSpot": {
+    "symptoms": [
+      "Yapraklarda küçük, sulu görünümlü, koyu kahverengi lekeler oluşur; genellikle sarı hale bulunmaz.",
+      "Meyvelerde kahverengi, pürüzlü, siğil veya uyuz benzeri kabarık lekeler meydana gelir.",
+      "İleri aşamada yapraklar kavrulmuş gibi görünür ve dökülür; meyveler güneşte yanar."
+    ],
+    "treatment": [
+      "Bakır içerikli ilaçları mutlaka Mancozeb ile karıştırarak uygulayın (bakteriler saf bakıra dirençlidir).",
+      "Tarlada bitkiler ıslakken asla budama veya hasat yapmayın, bakteri temasla yayılır.",
+      "Enfekte olan fideleri tarlaya dikmeyin, hemen imha edin."
+    ],
+    "prevention": [
+      "Sadece sertifikalı ve hastalıktan ari tohum kullanın; mümkünse tohumlara sıcak su uygulaması yapın.",
+      "Aynı tarlaya en az 2-3 yıl boyunca domates veya biber ekmeyin (münavebe).",
+      "Hava sirkülasyonunu artırmak için bitkileri sık dikmekten kaçının ve damla sulama kullanın."
+    ]
+  },
+  "dsTomatoEarlyBlight": {
+    "symptoms": [
+      "Genellikle alt yapraklarda başlayan, iç içe geçmiş halkalar (hedef tahtası) şeklinde kahverengi lekeler görülür.",
+      "Lekelerin etrafındaki doku sararır; şiddetli enfeksiyonda yapraklar tamamen kurur ve dökülür.",
+      "Meyvelerin sap kısmında koyu renkli, çökük, kösele gibi sert ve halkalı çürükler oluşur."
+    ],
+    "treatment": [
+      "Hava sirkülasyonunu artırmak için alt yaprakları budayın ve bitkiyi sırığa alın.",
+      "Hastalık belirtileri görülmeden koruyucu olarak Bakır veya Chlorothalonil içerikli fungisitler uygulayın.",
+      "Enfekte olmuş yaprakları yağmurlu havalarda değil, kuru havalarda temizleyin."
+    ],
+    "prevention": [
+      "Topraktaki mantar sporlarının sıçramasını önlemek için bitki diplerine malç (saman/plastik) serin.",
+      "Aynı tarlaya en az 3 yıl boyunca domates, patates veya patlıcan ekmeyin.",
+      "Yaprakları ıslatmamak için yağmurlama yerine damla sulama sistemi kullanın."
+    ]
+  },
+  "dsTomatoLateBlight": {
+    "symptoms": [
+      "Yapraklarda soluk yeşil, sulu görünümlü lekeler oluşur; hızla koyu kahverengi veya siyaha döner.",
+      "Nemli havalarda yaprak altındaki lekelerin kenarında beyaz, pamuksu bir küf tabakası görülür.",
+      "Meyvelerde sert, yüzeyi pürüzlü, yağlı görünümlü koyu kahverengi lekeler oluşur."
+    ],
+    "treatment": [
+      "Hastalık çok hızlı ve yıkıcıdır; belirti görülen bitkileri hemen söküp poşetleyerek çöpe atın.",
+      "Sağlıklı bitkileri korumak için Chlorothalonil veya Bakır bazlı koruyucu fungisitler uygulayın.",
+      "Organik tarımda bakır uygulamaları hastalığın yayılmasını yavaşlatabilir ancak tamamen durdurmaz."
+    ],
+    "prevention": [
+      "En etkili yöntem, Geç Yanıklığa dayanıklı domates çeşitlerini dikmektir.",
+      "Yaprakların ıslak kalması hastalığı tetikler; mutlaka damla sulama kullanın.",
+      "Kendi tohumunuzu veya fidenizi kullanıyorsanız, hastalıktan ari olduğundan emin olun."
+    ]
+  },
+  "dsTomatoLeafMold": {
+    "symptoms": [
+      "Yaprakların üst yüzeyinde sınırları belirsiz, soluk sarı veya açık yeşil lekeler oluşur.",
+      "Yaprakların alt yüzeyinde, lekelerin tam karşısında zeytin yeşili veya kahverengi kadifemsi bir küf meydana gelir.",
+      "Hastalık alt yapraklardan başlar; yapraklar kurusa bile genellikle dökülmeyip bitkide asılı kalır."
+    ],
+    "treatment": [
+      "Sera içi nemi %85'in altına düşürmek için havalandırmayı artırın; bu en etkili yöntemdir.",
+      "Hastalık görüldüğünde Bakır veya Chlorothalonil içerikli fungisitler uygulayarak yayılmayı yavaşlatın.",
+      "Şiddetli enfekte olmuş alt yaprakları dikkatlice budayıp ortamdan uzaklaştırın."
+    ],
+    "prevention": [
+      "Mutlaka 'Yaprak Küfü'ne dayanıklı olduğu belirtilen domates çeşitlerini tercih edin.",
+      "Bitkiler arasında hava akımını sağlamak için geniş dikim aralığı bırakın ve budama yapın.",
+      "Yaprakları ıslatmamak için damla sulama kullanın; ıslak yapraklar riski artırır."
+    ]
+  },
+  "dsTomatoSeptoria": {
+    "symptoms": [
+      "Alt yapraklarda çok sayıda küçük, dairesel lekeler oluşur; kenarları koyu, ortası gridir.",
+      "Lekelerin gri merkezinde, büyüteçle görülebilen küçük siyah noktalar (piknitler) bulunur.",
+      "Hastalık yaprakları sarartıp dökse de, Erken Yanıklığın aksine meyvelerde leke yapmaz."
+    ],
+    "treatment": [
+      "Hastalığın yayılmasını yavaşlatmak için lekeli alt yaprakları hemen budayın.",
+      "Belirtiler görülür görülmez Chlorothalonil veya Bakır içerikli fungisitler uygulayın.",
+      "Hasat sonunda tarladaki tüm bitki artıklarını temizleyin ve yakın."
+    ],
+    "prevention": [
+      "Topraktaki sporların sıçramasını önlemek için bitki diplerine mutlaka malç serin.",
+      "Domates, patates veya patlıcanı aynı yere üst üste ekmeyin, 3 yıllık ekim nöbeti uygulayın.",
+      "Yaprakların ıslak kalma süresini azaltmak için sabah erken saatlerde sulama yapın."
+    ]
+  },
+  "dsTomatoSpiderMites": {
+    "symptoms": [
+      "Yaprakların üst yüzeyinde iğne ucu büyüklüğünde, sarı veya beyazımsı benekler oluşur.",
+      "Zararlı yoğunluğu arttığında yaprak altlarında veya dallar arasında ince ağlar görülür.",
+      "Şiddetli istilada yapraklar bronzlaşır, kurur ve dökülür; bitki cılız kalır."
+    ],
+    "treatment": [
+      "Geniş spektrumlu böcek ilaçlarından kaçının; bunlar doğal düşmanları öldürerek popülasyonu artırır.",
+      "Yüksek basınçlı su, böcek sabunları veya Neem yağı kullanarak popülasyonu bastırın.",
+      "Ticari üretimde sadece kırmızı örümceğe özel 'akarisitler' kullanılmalıdır."
+    ],
+    "prevention": [
+      "Kırmızı örümcekler tozu sever; tarla yollarını sulayarak tozu azaltın.",
+      "Biyolojik mücadele için predatör (avcı) akarları bahçeye salın.",
+      "Kışı geçirdikleri yabani otları tarladan temizleyin."
+    ]
+  },
+  "dsTomatoTargetSpot": {
+    "symptoms": [
+      "Yapraklarda koyu kahverengi, iç içe halkalar içeren lekeler oluşur; genellikle belirgin sarı bir hale vardır.",
+      "Lekelerin merkezi zamanla kurur ve dökülür, yaprakta saçma deliği gibi delikler bırakır.",
+      "Meyvelerde kahverengi, çökük lekeler oluşur ve bu lekelerin ortası genellikle çatlar."
+    ],
+    "treatment": [
+      "Hastalık görüldüğünde Chlorothalonil veya Mancozeb içerikli koruyucu fungisitler uygulayın.",
+      "Strobilurin grubu ilaçlara karşı direnç gelişebileceği için bu ilaçları tek başına kullanmayın.",
+      "Hava sirkülasyonunu artırmak adına alt yaprakları budayın."
+    ],
+    "prevention": [
+      "Sera veya tarlada bitkiler arasındaki hava akımını artırın; nemli yapraklar hastalığı tetikler.",
+      "Mantar yabancı otlarda barınabildiği için tarla çevresindeki otları temizleyin.",
+      "Hasat sonrası bitki artıklarını mutlaka yok edin, mantar bu atıklarda yaşayabilir."
+    ]
+  },
+  "dsTomatoYellowCurl": {
+    "symptoms": [
+      "Yapraklar küçülür, yukarı doğru kıvrılarak 'kaşık' şeklini alır ve kenarları sararır.",
+      "Bitki ciddi şekilde bodur kalır ve yeni çıkan sürgünler çalılaşmış görünür.",
+      "Çiçekler meyveye dönüşmeden dökülür; meyve tutumu olsa bile domatesler küçük kalır."
+    ],
+    "treatment": [
+      "Virüsün kimyasal tedavisi yoktur; enfekte bitkiler hemen sökülüp imha edilmelidir.",
+      "Hastalığı taşıyan 'Beyaz Sinek' ile mücadele edin; Neem yağı veya uygun insektisitler kullanın.",
+      "Virüs temasla bulaşmaz, sadece sinekle bulaşır; bu yüzden alet dezenfeksiyonu ikincil önemdedir."
+    ],
+    "prevention": [
+      "En kesin çözüm TYLCV'ye dayanıklı domates çeşitlerini ekmektir.",
+      "Beyaz sinekleri uzak tutmak için gümüş renkli (yansıtıcı) malçlar kullanın.",
+      "Fideleri tarlaya dikmeden önce tüllerle örterek sinek temasını kesin."
+    ]
+  },
+  "dsTomatoMosaic": {
+    "symptoms": [
+      "Yapraklarda açık ve koyu yeşil renklerin birbirine girdiği 'mozaik' deseni oluşur.",
+      "Bazı durumlarda yapraklar ip gibi incelir, bükülür ve 'eğrelti otu' şeklini alır.",
+      "Meyveler dıştan normal görünse bile içinde kahverengi çizgiler oluşabilir."
+    ],
+    "treatment": [
+      "Kimyasal tedavisi yoktur; enfekte bitkiyi kökleriyle birlikte hemen söküp imha edin.",
+      "Ellerinizi ve aletlerinizi sık sık %10'luk çamaşır suyu veya yağsız süt ile dezenfekte edin.",
+      "Hastalık dokunmayla bulaştığı için, çalışırken sağlıklı bitkilerden başlayın."
+    ],
+    "prevention": [
+      "Tütün ürünleri virüsü taşıyabildiği için, bitkilere dokunmadan önce ellerinizi yıkayın.",
+      "Mozaik virüsüne dayanıklı sertifikalı tohumlar kullanın.",
+      "Virüs bitki artıklarında yaşayabildiği için en az 2 yıllık ekim nöbeti uygulayın."
+    ]
+  },
+  "dsAppleHealthy": {
+    "symptoms": [
+      "Yapraklar dengeli yeşil görünür; uyuz, çürüklük, pas veya olağan dışı leke yoktur.",
+      "Yeni sürgünler sağlamdır ve meyvelerde belirgin hastalık lezyonu görülmez.",
+      "Bitki mevsime ve çeşidine uygun normal gelişim gösterir."
+    ],
+    "treatment": [
+      "Bitki belirti göstermiyorsa hastalık tedavisi gerekmez.",
+      "Düzenli sulama, besleme, budama ve bahçe temizliğine devam edin.",
+      "Yağışlı veya nemli dönemlerden sonra mantari risk artabileceği için tekrar kontrol edin."
+    ],
+    "prevention": [
+      "Hava akışını artırmak için tacı düzenli budamayla açık tutun.",
+      "Patojen barındırabilecek dökülmüş yaprak ve meyveleri uzaklaştırın.",
+      "Riskli havalarda genç yaprakları ve meyveleri haftalık izleyin."
+    ]
+  },
+  "dsBlueberryHealthy": {
+    "symptoms": [
+      "Yapraklar lekesiz, yanık belirtisi olmadan ve düzgün yeşil görünür.",
+      "Dallar ve meyveler sağlamdır; görünür çürüklük yoktur.",
+      "Bitki düzenli mevsimsel gelişim gösterir."
+    ],
+    "treatment": [
+      "Sağlıklı bitki için hastalık tedavisi gerekmez.",
+      "Asidik toprak koşullarını ve düzenli nemi koruyun.",
+      "Erken belirtileri yakalamak için bitkileri düzenli inceleyin."
+    ],
+    "prevention": [
+      "Mümkünse üstten sulamadan kaçının.",
+      "Hava akışı için zayıf veya zarar görmüş dalları çıkarın.",
+      "Kök çevresinde su birikmesini önleyin ve malçı temiz tutun."
+    ]
+  },
+  "dsCherryHealthy": {
+    "symptoms": [
+      "Yapraklar külleme veya şekil bozukluğu olmadan temiz ve yeşildir.",
+      "Sürgünlerde ve meyvelerde görünür hastalık lezyonu yoktur.",
+      "Taç dengeli ve canlı görünür."
+    ],
+    "treatment": [
+      "Ağaç belirti göstermiyorsa hastalık tedavisi gerekmez.",
+      "Rutin bahçe temizliği ve beslemeye devam edin.",
+      "Sıcak ve nemli dönemlerde daha yakından izleyin."
+    ],
+    "prevention": [
+      "Işık ve hava girişi için düzenli budama yapın.",
+      "Dökülmüş yaprakları ve hastalıklı bitki artıklarını uzaklaştırın.",
+      "Hassas sürgünleri artırabilecek aşırı azottan kaçının."
+    ]
+  },
+  "dsCornHealthy": {
+    "symptoms": [
+      "Yapraklar yeşil ve diktir; pas püstülü veya gri yaprak lekesi yoktur.",
+      "Saplar sağlamdır ve büyüme normal seyreder.",
+      "Yaprak yüzeyinde yayılan lezyon görülmez."
+    ],
+    "treatment": [
+      "Sağlıklı mısır için hastalık tedavisi gerekmez.",
+      "Önemli büyüme dönemlerinde dengeli besleme ve su sağlayın.",
+      "Erken hastalık belirtileri için alt yaprakları düzenli kontrol edin."
+    ],
+    "prevention": [
+      "Bitki artıklarından gelen hastalık baskısını azaltmak için münavebe yapın.",
+      "Mümkünse dayanıklı hibritler kullanın.",
+      "Tarlada nemi hapseden çok sık ekimden kaçının."
+    ]
+  },
+  "dsGrapeHealthy": {
+    "symptoms": [
+      "Yapraklarda siyah çürüklük, esca benzeri izler veya yaprak yanıklığı lekeleri yoktur.",
+      "Sürgünler ve salkımlar görünür mantar gelişimi veya çürüklük göstermez.",
+      "Asma normal sürgün ve salkım gelişimi gösterir."
+    ],
+    "treatment": [
+      "Asma belirti göstermiyorsa hastalık tedavisi gerekmez.",
+      "Düzenli taç yönetimi ve kontrollü sulamaya devam edin.",
+      "Yağışlardan sonra yaprak ve salkımları kontrol edin."
+    ],
+    "prevention": [
+      "Hava akışı için asmayı budayın ve terbiye edin.",
+      "Kurumuş meyveleri ve enfekte artıkları uzaklaştırın.",
+      "Günün geç saatlerinde yaprakları ıslatmaktan kaçının."
+    ]
+  },
+  "dsPeachHealthy": {
+    "symptoms": [
+      "Yapraklar bakteriyel leke belirtisi olmadan temiz ve normal şekildedir.",
+      "Meyve kabuğu pürüzsüzdür; çukurlaşma veya koyu leke yoktur.",
+      "Sürgünler sağlıklı mevsimsel gelişim gösterir."
+    ],
+    "treatment": [
+      "Belirti yoksa hastalık tedavisi gerekmez.",
+      "Rutin ağaç bakımı ve bahçe temizliğine devam edin.",
+      "Fırtına, rüzgar zararı veya uzun süreli yaprak ıslaklığından sonra izleyin."
+    ],
+    "prevention": [
+      "Bakteriyel lekenin yaygın olduğu bölgelerde dayanıklı çeşitler seçin.",
+      "Taç içi nemi azaltmak için budama yapın.",
+      "Aşırı azot ve üstten sulamadan kaçının."
+    ]
+  },
+  "dsPepperHealthy": {
+    "symptoms": [
+      "Yaprak ve meyvelerde koyu, sulu görünümlü bakteriyel lekeler yoktur.",
+      "Bitki yaygın sararma olmadan dik ve düzenli gelişir.",
+      "Meyve yüzeyleri temiz ve sağlamdır."
+    ],
+    "treatment": [
+      "Bitki sağlıklıysa hastalık tedavisi gerekmez.",
+      "Dengeli sulama yapın ve toprağın yapraklara sıçramasını azaltın.",
+      "Yağışlı veya nemli havalardan sonra kontrole devam edin."
+    ],
+    "prevention": [
+      "Sertifikalı tohum veya sağlıklı fide kullanın.",
+      "Biber ve domates ekili alanlarda münavebe uygulayın.",
+      "Yapraklar ıslakken bitkilere dokunmaktan kaçının."
+    ]
+  },
+  "dsPotatoHealthy": {
+    "symptoms": [
+      "Yapraklar yeşildir; erken veya geç yanıklık lezyonları yoktur.",
+      "Saplar sağlam ve diktir.",
+      "Sulu görünümlü ya da hızla yayılan lekeler görülmez."
+    ],
+    "treatment": [
+      "Sağlıklı bitkiler için hastalık tedavisi gerekmez.",
+      "Dengeli nem ve besleme sağlayın.",
+      "Serin ve yağışlı koşullarda sık gözlem yapın."
+    ],
+    "prevention": [
+      "Sertifikalı, hastalıksız tohumluk patates kullanın.",
+      "Bitkileri düzgün boğaz doldurun ve üstten sulamadan kaçının.",
+      "Gönüllü patatesleri ve hasat artıklarını yok edin."
+    ]
+  },
+  "dsRaspberryHealthy": {
+    "symptoms": [
+      "Yaprak ve sürgünler lekesiz, geriye ölüm veya olağan dışı sararma olmadan canlı görünür.",
+      "Meyveler normal gelişir ve sağlam kalır.",
+      "Bitki sağlıklı yeni sürgün oluşturur."
+    ],
+    "treatment": [
+      "Belirti yoksa hastalık tedavisi gerekmez.",
+      "Düzenli budama ve sulamaya devam edin.",
+      "Büyüme dönemi boyunca sürgünleri ve yaprakları izleyin."
+    ],
+    "prevention": [
+      "Hasattan sonra meyve vermiş sürgünleri çıkarın.",
+      "Sıraları hava akışına açık tutun.",
+      "Islak ve sıkışık dikim koşullarından kaçının."
+    ]
+  },
+  "dsSoybeanHealthy": {
+    "symptoms": [
+      "Yapraklar yaygın leke, sararma veya küf belirtisi olmadan dengeli yeşildir.",
+      "Bitkiler normal boy, dallanma ve bakla gelişimi gösterir.",
+      "Taçta belirgin hastalık lezyonu yoktur."
+    ],
+    "treatment": [
+      "Sağlıklı soya bitkileri için hastalık tedavisi gerekmez.",
+      "Vejetatif ve generatif dönemlerde tarla gözlemine devam edin.",
+      "Sadece belirti veya yerel hastalık baskısı varsa müdahale edin."
+    ],
+    "prevention": [
+      "Hastalık baskısının yüksek olduğu alanlarda münavebe ve artık yönetimi yapın.",
+      "Mümkünse dayanıklı çeşitler kullanın.",
+      "Belirti veya risk yokken gereksiz yaprak uygulamalarından kaçının."
+    ]
+  },
+  "dsStrawberryHealthy": {
+    "symptoms": [
+      "Yapraklar yeşildir; yanık, leke veya kuru kıvrılmış kenar yoktur.",
+      "Taç ve meyveler sağlamdır; görünür çürüklük yoktur.",
+      "Bitki dönemine uygun sürgün, çiçek veya meyve üretir."
+    ],
+    "treatment": [
+      "Bitki sağlıklıysa hastalık tedavisi gerekmez.",
+      "Temiz sulamaya devam edin ve eski yaprakları gerektiğinde uzaklaştırın.",
+      "Nemli veya sıkışık yataklarda daha yakından izleyin."
+    ],
+    "prevention": [
+      "Mümkünse damla sulama kullanın.",
+      "Temiz malçla meyve ve yaprakları ıslak topraktan uzak tutun.",
+      "Belirti görülürse hastalıklı yaprakları hızla çıkarın."
+    ]
+  },
+  "dsTomatoHealthy": {
+    "symptoms": [
+      "Yapraklar lekesiz, küfsüz, mozaik desensiz, akar belirtisiz ve kıvrılmadan dengeli yeşildir.",
+      "Saplar ve meyveler sağlam ve normal renktedir.",
+      "Bitki ani solma veya sararma olmadan düzenli büyür."
+    ],
+    "treatment": [
+      "Bitki belirti göstermiyorsa hastalık tedavisi gerekmez.",
+      "Düzenli sulama, besleme ve budamaya devam edin.",
+      "Domates hastalıkları yağış sonrası hızlı yayılabileceği için gözlemi sürdürün."
+    ],
+    "prevention": [
+      "Yaprak ıslaklığını ve toprak sıçramasını azaltmak için malç ve damla sulama kullanın.",
+      "Toprağa temas eden alt yaprakları uzaklaştırın.",
+      "Mümkünse domates, biber, patates ve patlıcandan sonra münavebe yapın."
+    ]
+  }
+}

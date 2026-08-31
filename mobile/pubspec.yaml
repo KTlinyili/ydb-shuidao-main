@@ -1,0 +1,38 @@
+name: riceguard
+description: 稻病检测助手 - 水稻病虫害智能检测与预警系统
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  image_picker: ^1.0.7
+  tflite_flutter: ^0.11.0
+  http: ^1.2.0
+  shared_preferences: ^2.2.2
+  flutter_riverpod: ^2.4.9
+  go_router: ^13.0.1
+  google_fonts: ^6.2.1
+  fl_chart: ^0.66.2
+  intl: ^0.19.0
+  path_provider: ^2.1.2
+  image: ^4.1.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/models/
+    - assets/data/
+    - assets/images/backgrounds/
+    - assets/images/branding/
+    - assets/images/farmer/
+    - assets/sample_diseases/

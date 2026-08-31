@@ -1,0 +1,4 @@
+brown_spot
+healthy
+leaf_blast
+neck_blast
