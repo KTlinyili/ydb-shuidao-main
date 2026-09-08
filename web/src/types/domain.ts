@@ -27,7 +27,7 @@ export type Severity = '轻微' | '中等' | '偏重' | '严重';
 export type RiskLevel = 'low' | 'medium' | 'high' | 'critical';
 
 /** 预警处理状态 */
-export type WarningStatus = 'pending' | 'processing' | 'resolved';
+export type WarningStatus = 'pending' | 'processing' | 'resolved' | 'acknowledged' | 'closed';
 
 /** 设备类型 */
 export type DeviceKind = 'camera' | 'env_sensor' | 'soil_sensor' | 'edge' | 'gateway';
@@ -162,8 +162,14 @@ export interface WarningRecord {
   detectionId: string;
   /** 处置建议 */
   advice: string[];
+  /** 风险原因（后端返回） */
+  reason?: string;
+  /** 防治建议（后端返回，纯文本） */
+  recommendation?: string;
   handler?: string;
   resolvedAt?: string;
+  acknowledgedAt?: string;
+  closedAt?: string;
 }
 
 /** 知识库文档 */

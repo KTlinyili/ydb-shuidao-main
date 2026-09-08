@@ -12,6 +12,7 @@ export default defineConfig({
   server: {
     port: 5173,
     host: true,
+    allowedHosts: true,
     // 预留：后端联调时代理到 FastAPI 服务
     proxy: {
       '/api': {

@@ -10,8 +10,16 @@ from fastapi.templating import Jinja2Templates
 
 from app.api.routes_cases import router as cases_router
 from app.api.routes_diagnosis import router as diagnosis_router
+from app.api.routes_environment import router as environment_router
 from app.api.routes_knowledge import router as knowledge_router
 from app.api.routes_runs import router as runs_router
+from app.api.routes_video import router as video_router
+from app.api.routes_text_diagnosis import router as text_diagnosis_router
+from app.api.routes_vision import router as vision_router
+from app.api.routes_warnings import router as warnings_router
+from app.api.routes_models import router as models_router
+from app.api.routes_system import router as system_router
+from app.api.routes_history import router as history_router
 from app.core.config import get_settings
 from app.core.pipeline.diagnosis_pipeline import DiagnosisPipeline
 
@@ -78,3 +86,11 @@ app.include_router(diagnosis_router)
 app.include_router(runs_router)
 app.include_router(cases_router)
 app.include_router(knowledge_router)
+app.include_router(vision_router)
+app.include_router(video_router)
+app.include_router(text_diagnosis_router)
+app.include_router(environment_router)
+app.include_router(warnings_router)
+app.include_router(models_router)
+app.include_router(system_router)
+app.include_router(history_router)

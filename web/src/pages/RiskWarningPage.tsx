@@ -4,7 +4,9 @@ import {
   CheckCircleOutlined,
   ClockCircleOutlined,
   ExportOutlined,
+  ReloadOutlined,
   SendOutlined,
+  StopOutlined,
   ThunderboltOutlined,
 } from '@ant-design/icons';
 import {
@@ -18,6 +20,7 @@ import {
   Progress,
   Radio,
   Row,
+  Skeleton,
   Space,
   Statistic,
   Table,
@@ -28,7 +31,7 @@ import {
   message,
 } from 'antd';
 import type { WarningRecord } from '@/types/domain';
-import { listWarnings, getRiskSeries, getLesionAreaSeries } from '@/api/services';
+import { listWarnings, getRiskSeries, getLesionAreaSeries, ackWarning, closeWarning } from '@/api/services';
 import { PageHeader, PestTag, RiskTag } from '@/components/common';
 import { LesionAreaChart, RiskTrendChart, riskLegendNote } from '@/components/charts';
 import { RISK_LEVEL_META, PEST_META } from '@/utils/constants';
@@ -48,10 +51,39 @@ export default function RiskWarningPage() {
   const [dispatchOpen, setDispatchOpen] = useState(false);
   const [timelineData, setTimelineData] = useState<Awaited<ReturnType<typeof getRiskSeries>>>([]);
   const [areaData, setAreaData] = useState<Awaited<ReturnType<typeof getLesionAreaSeries>>>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    listWarnings().then(setRecords);
+    listWarnings().then((data) => {
+      setRecords(data);
+      setLoading(false);
+    });
   }, []);
+
+  const refresh = () => {
+    listWarnings().then(setRecords);
+    message.success('已刷新');
+  };
+
+  const handleAck = async (id: string) => {
+    const ok = await ackWarning(id);
+    if (ok) {
+      message.success('已确认预警');
+      refresh();
+    } else {
+      message.error('操作失败');
+    }
+  };
+
+  const handleClose = async (id: string) => {
+    const ok = await closeWarning(id);
+    if (ok) {
+      message.success('已关闭预警');
+      refresh();
+    } else {
+      message.error('操作失败');
+    }
+  };
 
   const active = useMemo(
     () => records.find((w) => w.id === activeId) ?? records[0],
@@ -83,11 +115,22 @@ export default function RiskWarningPage() {
       high: records.filter((w) => w.level === 'high').length,
       medium: records.filter((w) => w.level === 'medium').length,
       pending: records.filter((w) => w.status === 'pending').length,
-      processing: records.filter((w) => w.status === 'processing').length,
-      resolved: records.filter((w) => w.status === 'resolved').length,
+      processing: records.filter((w) => w.status === 'processing' || w.status === 'acknowledged').length,
+      resolved: records.filter((w) => w.status === 'resolved' || w.status === 'closed').length,
     }),
     [records],
   );
+
+  if (!records.length && loading) {
+    return (
+      <div>
+        <PageHeader title="风险预警" subtitle="加载中..." />
+        <Card size="small" style={{ marginTop: 12 }}>
+          <Skeleton active paragraph={{ rows: 8 }} />
+        </Card>
+      </div>
+    );
+  }
 
   if (!records.length) return null;
 
@@ -98,6 +141,7 @@ export default function RiskWarningPage() {
         subtitle="综合风险 = 视觉 45% + 环境 35% + 趋势 20% · 分级：低 <35 · 中 35~54 · 高 55~74 · 严重 ≥75"
         extra={
           <Space>
+            <Button icon={<ReloadOutlined />} onClick={refresh}>刷新</Button>
             <Button icon={<ExportOutlined />}>导出报表</Button>
             <Button type="primary" icon={<SendOutlined />} onClick={() => setDispatchOpen(true)}>
               一键派单
@@ -175,8 +219,10 @@ export default function RiskWarningPage() {
                   options={[
                     { value: 'all', label: '全部状态' },
                     { value: 'pending', label: '待处理' },
+                    { value: 'acknowledged', label: '已确认' },
                     { value: 'processing', label: '处置中' },
                     { value: 'resolved', label: '已解除' },
+                    { value: 'closed', label: '已关闭' },
                   ]}
                 />
               </Space>
@@ -229,11 +275,44 @@ export default function RiskWarningPage() {
                     <span
                       style={{
                         fontSize: 12,
-                        color: s === 'pending' ? '#B9452F' : s === 'processing' ? '#C08A2E' : '#3D8B5F',
+                        color:
+                          s === 'pending'
+                            ? '#B9452F'
+                            : s === 'acknowledged'
+                              ? '#C08A2E'
+                              : s === 'processing'
+                                ? '#C08A2E'
+                                : '#3D8B5F',
                       }}
                     >
-                      {s === 'pending' ? '● 待处理' : s === 'processing' ? '● 处置中' : '● 已解除'}
+                      {s === 'pending'
+                        ? '● 待处理'
+                        : s === 'acknowledged'
+                          ? '● 已确认'
+                          : s === 'processing'
+                            ? '● 处置中'
+                            : s === 'closed'
+                              ? '● 已关闭'
+                              : '● 已解除'}
                     </span>
+                  ),
+                },
+                {
+                  title: '操作',
+                  width: 140,
+                  render: (_, r: WarningRecord) => (
+                    <Space size={4}>
+                      {r.status === 'pending' && (
+                        <Button size="small" type="link" onClick={(e) => { e.stopPropagation(); handleAck(r.id); }}>
+                          确认
+                        </Button>
+                      )}
+                      {(r.status === 'pending' || r.status === 'acknowledged') && (
+                        <Button size="small" type="link" danger onClick={(e) => { e.stopPropagation(); handleClose(r.id); }}>
+                          关闭
+                        </Button>
+                      )}
+                    </Space>
                   ),
                 },
               ]}

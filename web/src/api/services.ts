@@ -38,7 +38,7 @@ export const USE_MOCK = true;
  * POST /api/v1/diagnosis/run（Vite 已将 /api 代理到 127.0.0.1:8000）。
  * 其余页面仍走 USE_MOCK。
  */
-export const CONSULT_USE_REAL_API = true;
+export const CONSULT_USE_REAL_API = false;
 
 /**
  * 后端接口映射（预留）。后端就绪后按此路径实现 fetch 封装：
@@ -58,12 +58,16 @@ export const CONSULT_USE_REAL_API = true;
  */
 export const ENDPOINTS = {
   plots: '/api/v1/plots',
-  devices: '/api/v1/devices',
+  devices: '/api/v1/environment/devices',
   detections: '/api/v1/detections',
-  envSeries: '/api/v1/env/series',
+  envSeries: '/api/v1/environment/series',
+  envCurrent: '/api/v1/environment/current',
+  envSimStatus: '/api/v1/environment/simulator/status',
+  envSimAnomaly: '/api/v1/environment/simulator/anomaly',
   riskSeries: '/api/v1/risk/series',
   lesionArea: '/api/v1/risk/lesion-area',
   warnings: '/api/v1/warnings',
+  riskCompute: '/api/v1/warnings/risk/compute',
   knowledge: '/api/v1/knowledge/docs',
   cases: '/api/v1/cases',
   diagnosisRun: '/api/v1/diagnosis/run',
@@ -147,6 +151,25 @@ export async function getLatestDetections(): Promise<DetectionRecord[]> {
 }
 
 export async function getEnvSeries(range: TimeRange, plotId?: string): Promise<EnvSnapshot[]> {
+  if (!USE_MOCK) {
+    try {
+      const limitMap: Record<TimeRange, number> = { '24h': 288, '7d': 200, '30d': 288 };
+      const res = await fetch(`${ENDPOINTS.envSeries}?limit=${limitMap[range] ?? 60}&plot_id=${plotId ?? 'plot-1'}`);
+      const data = await res.json();
+      if (data?.data && Array.isArray(data.data)) {
+        return data.data.map((d: any) => ({
+          time: new Date(d.timestamp * 1000).toISOString(),
+          temperature: d.temperature,
+          humidity: d.humidity,
+          light: Math.round(d.light / 1000 * 10) / 10,
+          soilMoisture: d.soil_moisture,
+          plotId: d.plot_id,
+        }));
+      }
+    } catch {
+      // fallthrough to mock
+    }
+  }
   await delay(60);
   return genEnvSeries(range, plotId);
 }
@@ -165,8 +188,77 @@ export async function getLesionAreaSeries(
 }
 
 export async function listWarnings(): Promise<WarningRecord[]> {
+  if (!USE_MOCK) {
+    try {
+      const res = await fetch(ENDPOINTS.warnings);
+      const data = await res.json();
+      if (data?.items && Array.isArray(data.items)) {
+        return data.items.map((w: any) => ({
+          id: w.id,
+          plotId: w.plot_id,
+          level: w.level as any,
+          visualRisk: Math.round(w.visual_risk * 100),
+          envRisk: Math.round(w.environment_risk * 100),
+          trendRisk: Math.round(w.trend_risk * 100),
+          compositeRisk: Math.round(w.composite_risk * 100),
+          reason: w.reason,
+          recommendation: w.recommendation,
+          status: w.status as any,
+          time: new Date(w.created_at * 1000).toISOString(),
+          pest: 'multi',
+          trigger: w.reason || '综合风险触发',
+          detectionId: '',
+          advice: w.recommendation ? w.recommendation.split('；') : [],
+          acknowledgedAt: w.acknowledged_at ? new Date(w.acknowledged_at * 1000).toISOString() : undefined,
+          closedAt: w.closed_at ? new Date(w.closed_at * 1000).toISOString() : undefined,
+        }));
+      }
+    } catch {
+      // fallthrough to mock
+    }
+  }
   await delay(70);
   return warningRecords;
+}
+
+export async function ackWarning(id: string): Promise<boolean> {
+  if (!USE_MOCK) {
+    try {
+      const res = await fetch(`${ENDPOINTS.warnings}/${id}/ack`, { method: 'POST' });
+      return res.ok;
+    } catch {
+      return false;
+    }
+  }
+  await delay(40);
+  return true;
+}
+
+export async function closeWarning(id: string): Promise<boolean> {
+  if (!USE_MOCK) {
+    try {
+      const res = await fetch(`${ENDPOINTS.warnings}/${id}/close`, { method: 'POST' });
+      return res.ok;
+    } catch {
+      return false;
+    }
+  }
+  await delay(40);
+  return true;
+}
+
+export async function setEnvAnomaly(anomaly: string | null): Promise<boolean> {
+  if (!USE_MOCK) {
+    try {
+      const param = anomaly ? `?anomaly=${anomaly}` : '?anomaly=normal';
+      const res = await fetch(ENDPOINTS.envSimAnomaly + param, { method: 'POST' });
+      return res.ok;
+    } catch {
+      return false;
+    }
+  }
+  await delay(40);
+  return true;
 }
 
 export async function searchKnowledge(q: string): Promise<KnowledgeDoc[]> {
@@ -301,4 +393,147 @@ export async function getEnvRiskNow(plotId: string): Promise<number> {
 /** 检测框画布按 agent 顺序播放轮次（会诊页动画用） */
 export function orderTurns(turns: AgentTurn[]): AgentTurn[] {
   return [...turns].sort((a, b) => a.round - b.round);
+}
+
+export interface ClassifyResult {
+  top1Class: string;
+  top1Confidence: number;
+  top5: { cls: string; confidence: number }[];
+  inferenceMs: number;
+  filename: string;
+}
+
+export async function classifyImage(file: File): Promise<ClassifyResult> {
+  const form = new FormData();
+  form.append('file', file);
+  const res = await fetch('/api/v1/vision/image', { method: 'POST', body: form });
+  if (!res.ok) {
+    const detail = await res.text().catch(() => `HTTP ${res.status}`);
+    throw new Error(`识别失败：${detail}`);
+  }
+  const data = await res.json();
+  return {
+    top1Class: data.top1_class ?? 'unknown',
+    top1Confidence: data.top1_confidence ?? 0,
+    top5: data.top5 ?? [],
+    inferenceMs: data.inference_ms ?? 0,
+    filename: data.filename ?? file.name,
+  };
+}
+
+/** 文字症状诊断结果 */
+export interface TextDiagnosisMatch {
+  diseaseKey: string;
+  diseaseName: string;
+  diseaseNameEn: string;
+  matchScore: number;
+  matchedKeywords: string[];
+  symptoms: string[];
+  severityWeight: number;
+  treatment: string[];
+  prevention: string[];
+  favorable: string;
+}
+
+export interface TextDiagnosisResult {
+  matches: TextDiagnosisMatch[];
+  topMatch: TextDiagnosisMatch | null;
+  riskLevel: 'low' | 'medium' | 'high' | 'critical';
+  riskScore: number;
+  summary: string;
+  recommendations: string[];
+}
+
+/** 文字症状诊断 Mock 数据 */
+const MOCK_TEXT_DIAGNOSIS: Record<string, TextDiagnosisResult> = {
+  default: {
+    matches: [
+      {
+        diseaseKey: 'rice_blast',
+        diseaseName: '稻瘟病',
+        diseaseNameEn: 'Rice Blast',
+        matchScore: 0.72,
+        matchedKeywords: ['褐色', '斑点', '病斑'],
+        symptoms: ['叶片出现梭形病斑', '病斑中央灰白，边缘褐色'],
+        severityWeight: 0.9,
+        treatment: ['喷施三环唑或稻瘟灵杀菌剂', '发病初期每7天喷施一次，连续2-3次'],
+        prevention: ['选用抗病品种', '合理施肥，避免偏施氮肥'],
+        favorable: '适温（24-28°C）高湿（RH>90%）易发',
+      },
+      {
+        diseaseKey: 'brown_spot',
+        diseaseName: '褐斑病',
+        diseaseNameEn: 'Brown Spot',
+        matchScore: 0.58,
+        matchedKeywords: ['褐色', '斑点'],
+        symptoms: ['叶片出现褐色小斑点', '病斑椭圆形，边缘深褐'],
+        severityWeight: 0.7,
+        treatment: ['喷施苯醚甲环唑或咪鲜胺', '增施钾肥和硅肥提高抗性'],
+        prevention: ['增施有机肥和钾肥', '及时清除病残体'],
+        favorable: '缺肥、植株衰弱时易发',
+      },
+    ],
+    topMatch: null,
+    riskLevel: 'high',
+    riskScore: 65,
+    summary: '根据症状描述，最可能的病害为「稻瘟病」（Rice Blast），匹配度 72%，风险等级：高（风险分 65）。',
+    recommendations: ['喷施三环唑或稻瘟灵杀菌剂', '发病初期每7天喷施一次，连续2-3次'],
+  },
+};
+
+export async function diagnoseByText(text: string): Promise<TextDiagnosisResult> {
+  if (!USE_MOCK) {
+    try {
+      const res = await fetch('/api/v1/multimodal/text', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text }),
+      });
+      if (!res.ok) {
+        const detail = await res.text().catch(() => `HTTP ${res.status}`);
+        throw new Error(`诊断失败：${detail}`);
+      }
+      const data = await res.json();
+      return {
+        matches: (data.matches ?? []).map((m: any) => ({
+          diseaseKey: m.disease_key,
+          diseaseName: m.disease_name,
+          diseaseNameEn: m.disease_name_en,
+          matchScore: m.match_score,
+          matchedKeywords: m.matched_keywords ?? [],
+          symptoms: m.symptoms ?? [],
+          severityWeight: m.severity_weight,
+          treatment: m.treatment ?? [],
+          prevention: m.prevention ?? [],
+          favorable: m.favorable ?? '',
+        })),
+        topMatch: data.top_match ? {
+          diseaseKey: data.top_match.disease_key,
+          diseaseName: data.top_match.disease_name,
+          diseaseNameEn: data.top_match.disease_name_en,
+          matchScore: data.top_match.match_score,
+          matchedKeywords: data.top_match.matched_keywords ?? [],
+          symptoms: data.top_match.symptoms ?? [],
+          severityWeight: data.top_match.severity_weight,
+          treatment: data.top_match.treatment ?? [],
+          prevention: data.top_match.prevention ?? [],
+          favorable: data.top_match.favorable ?? '',
+        } : null,
+        riskLevel: data.risk_level ?? 'low',
+        riskScore: data.risk_score ?? 0,
+        summary: data.summary ?? '',
+        recommendations: data.recommendations ?? [],
+      };
+    } catch {
+      // fallthrough to mock
+    }
+  }
+  await delay(800);
+  const mock = MOCK_TEXT_DIAGNOSIS.default;
+  return {
+    ...mock,
+    topMatch: mock.matches[0] ?? null,
+    summary: mock.summary.replace('72%', `${Math.floor(60 + Math.random() * 20)}%`),
+    riskScore: Math.floor(55 + Math.random() * 20),
+  };
 }

@@ -8,6 +8,7 @@ import {
   ExperimentOutlined,
   FundOutlined,
   HistoryOutlined,
+  MenuOutlined,
   MonitorOutlined,
   ReadOutlined,
   ScanOutlined,
@@ -39,6 +40,14 @@ const MENU_ITEMS = [
   ]},
 ];
 
+const BOTTOM_NAV_ITEMS = [
+  { key: '/dashboard', icon: <DashboardOutlined />, label: '首页' },
+  { key: '/live', icon: <MonitorOutlined />, label: '监测' },
+  { key: '/identify', icon: <ScanOutlined />, label: '识别' },
+  { key: '/environment', icon: <FundOutlined />, label: '环境' },
+  { key: '/warnings', icon: <ThunderboltOutlined />, label: '预警' },
+];
+
 const PATH_NAMES: Record<string, string> = {
   '/dashboard': '首页概览',
   '/live': '实时监测',
@@ -57,19 +66,31 @@ export default function MainLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileSiderOpen, setMobileSiderOpen] = useState(false);
   const { token } = theme.useToken();
   const pendingCount = useMemo(
     () => warningRecords.filter((w) => w.status === 'pending').length,
     [],
   );
 
+  const handleMenuClick = ({ key }: { key: string }) => {
+    navigate(key);
+    setMobileSiderOpen(false);
+  };
+
+  const handleBottomNavClick = (key: string) => {
+    navigate(key);
+  };
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
+      {/* 侧边栏 - 移动端抽屉模式 */}
       <Layout.Sider
         collapsible
         collapsed={collapsed}
         onCollapse={setCollapsed}
         width={208}
+        className={mobileSiderOpen ? 'main-layout-sider sider-mobile-open' : 'main-layout-sider'}
         style={{
           borderRight: `1px solid ${token.colorBorderSecondary}`,
           overflow: 'auto',
@@ -102,7 +123,6 @@ export default function MainLayout() {
               flexShrink: 0,
             }}
           >
-            {/* 稻穗图形标识 */}
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
               <path
                 d="M12 21c0-6 0-9 0-11M12 10c0-2-1.5-4-4-4 0 2.5 1.5 4 4 4zm0 0c0-2 1.5-4 4-4 0 2.5-1.5 4-4 4zm0 4c0-2-1.5-4-4-4 0 2.5 1.5 4 4 4zm0 0c0-2 1.5-4 4-4 0 2.5-1.5 4-4 4z"
@@ -128,12 +148,20 @@ export default function MainLayout() {
           mode="inline"
           selectedKeys={[location.pathname]}
           items={MENU_ITEMS}
-          onClick={({ key }) => navigate(key)}
+          onClick={handleMenuClick}
           style={{ borderInlineEnd: 'none', paddingTop: 4, paddingBottom: 24 }}
         />
       </Layout.Sider>
 
-      <Layout style={{ marginLeft: collapsed ? 80 : 208, transition: 'margin-left .2s' }}>
+      {/* 移动端遮罩 */}
+      {mobileSiderOpen && (
+        <div className="mobile-overlay" onClick={() => setMobileSiderOpen(false)} />
+      )}
+
+      <Layout
+        className="main-layout-content"
+        style={{ marginLeft: collapsed ? 80 : 208, transition: 'margin-left .2s' }}
+      >
         <Layout.Header
           style={{
             position: 'sticky',
@@ -146,7 +174,11 @@ export default function MainLayout() {
             borderBottom: `1px solid ${token.colorBorderSecondary}`,
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 20, flex: 1, minWidth: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flex: 1, minWidth: 0 }}>
+            {/* 移动端菜单按钮 */}
+            <div className="mobile-menu-btn" onClick={() => setMobileSiderOpen(true)}>
+              <MenuOutlined style={{ fontSize: 18, color: '#3D474F' }} />
+            </div>
             <Breadcrumb
               items={[
                 { title: '稻影知微' },
@@ -155,6 +187,7 @@ export default function MainLayout() {
               style={{ flexShrink: 0 }}
             />
             <Input
+              className="header-search-input"
               prefix={<SearchOutlined style={{ color: '#9AA6AF' }} />}
               placeholder="搜索地块、设备、病虫害或知识条目…"
               size="middle"
@@ -167,7 +200,7 @@ export default function MainLayout() {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
             <Tooltip title="演示数据环境 · 每日 17:42 同步">
-              <span style={{ fontSize: 12, color: '#64707C' }}>
+              <span className="header-status-text" style={{ fontSize: 12, color: '#64707C' }}>
                 <span className="status-dot online pulse" />
                 边缘节点 2/2 在线
               </span>
@@ -192,7 +225,9 @@ export default function MainLayout() {
                 <Avatar size={28} style={{ background: '#5B8D73', fontSize: 12 }}>
                   稼
                 </Avatar>
-                <span style={{ fontSize: 13, color: '#3D474F' }}>王稼先</span>
+                <span style={{ fontSize: 13, color: '#3D474F' }} className="mobile-hide">
+                  王稼先
+                </span>
               </div>
             </Dropdown>
           </div>
@@ -207,10 +242,25 @@ export default function MainLayout() {
             fontSize: 11,
             color: '#A5AEB5',
           }}
+          className="mobile-hide"
         >
           稻影知微 RiceGuard · 演示版 v0.1 · 数据为模拟数据，仅用于比赛演示
         </div>
       </Layout>
+
+      {/* 移动端底部导航栏 */}
+      <div className="bottom-nav">
+        {BOTTOM_NAV_ITEMS.map((item) => (
+          <div
+            key={item.key}
+            className={`bottom-nav-item ${location.pathname === item.key ? 'active' : ''}`}
+            onClick={() => handleBottomNavClick(item.key)}
+          >
+            {item.icon}
+            <span className="bottom-nav-label">{item.label}</span>
+          </div>
+        ))}
+      </div>
     </Layout>
   );
 }

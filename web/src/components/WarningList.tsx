@@ -9,6 +9,8 @@ const STATUS_LABEL: Record<WarningRecord['status'], { text: string; color: strin
   pending: { text: '待处理', color: '#B9452F' },
   processing: { text: '处置中', color: '#C08A2E' },
   resolved: { text: '已解除', color: '#3D8B5F' },
+  acknowledged: { text: '已确认', color: '#C08A2E' },
+  closed: { text: '已关闭', color: '#3D8B5F' },
 };
 
 /** 预警列表（Dashboard、预警页共用） */

@@ -1,8 +1,15 @@
-import { useEffect, useMemo, useState } from 'react';
-import { CloudOutlined, DashboardOutlined, ExperimentOutlined, SunOutlined } from '@ant-design/icons';
-import { Card, Col, Progress, Row, Segmented, Table, Tag } from 'antd';
+import { useEffect, useMemo, useState, useRef } from 'react';
+import {
+  CloudOutlined,
+  DashboardOutlined,
+  ExperimentOutlined,
+  ReloadOutlined,
+  SunOutlined,
+  WarningOutlined,
+} from '@ant-design/icons';
+import { Button, Card, Col, Progress, Row, Segmented, Skeleton, Space, Switch, Table, Tag, message } from 'antd';
 import type { EnvSnapshot, TimeRange } from '@/types/domain';
-import { getEnvSeries, listPlots } from '@/api/services';
+import { getEnvSeries, listPlots, setEnvAnomaly } from '@/api/services';
 import { MetricStatistic, PageHeader } from '@/components/common';
 import { EnvTrendChart } from '@/components/charts';
 import { plotById } from '@/mock/farm';
@@ -24,10 +31,47 @@ export default function EnvMonitorPage() {
   const [plotId, setPlotId] = useState<string | 'all'>('all');
   const [series, setSeries] = useState<EnvSnapshot[]>([]);
   const [activeMetric, setActiveMetric] = useState<(typeof METRIC_DEFS)[number]['key']>('humidity');
+  const [autoRefresh, setAutoRefresh] = useState(false);
+  const timerRef = useRef<number | null>(null);
+  const [simAnomaly, setSimAnomaly] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const loadData = () => {
+    setLoading(true);
+    getEnvSeries(range, plotId === 'all' ? undefined : plotId).then((data) => {
+      setSeries(data);
+      setLoading(false);
+    });
+  };
 
   useEffect(() => {
-    getEnvSeries(range, plotId === 'all' ? undefined : plotId).then(setSeries);
+    loadData();
   }, [range, plotId]);
+
+  // 自动刷新
+  useEffect(() => {
+    if (autoRefresh) {
+      timerRef.current = window.setInterval(() => {
+        loadData();
+      }, 5000);
+    } else if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [autoRefresh, range, plotId]);
+
+  const handleSetAnomaly = async (type: string | null) => {
+    const ok = await setEnvAnomaly(type);
+    if (ok) {
+      setSimAnomaly(type);
+      message.success(type ? `已注入异常：${type}` : '已恢复正常');
+    } else {
+      message.error('操作失败（请确认后端已启动）');
+    }
+  };
 
   const current = series.at(-1);
   const dayStats = useMemo(() => {
@@ -65,7 +109,19 @@ export default function EnvMonitorPage() {
     });
   }, [series]);
 
-  if (!current || !dayStats) return null;
+  if (!current || !dayStats) {
+    return (
+      <div>
+        <PageHeader
+          title="环境监测"
+          subtitle="传感器网络：8 台气象站 + 4 台土壤墒情仪 · 5 分钟上报周期"
+        />
+        <Card size="small" style={{ marginTop: 12 }}>
+          <Skeleton active paragraph={{ rows: 6 }} />
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -73,14 +129,21 @@ export default function EnvMonitorPage() {
         title="环境监测"
         subtitle="传感器网络：8 台气象站 + 4 台土壤墒情仪 · 5 分钟上报周期"
         extra={
-          <Segmented
-            value={plotId}
-            onChange={(v) => setPlotId(v as string)}
-            options={[
-              { value: 'all', label: '全基地' },
-              ...['P01', 'P03', 'P05', 'P07'].map((p) => ({ value: p, label: p })),
-            ]}
-          />
+          <Space>
+            <Space size={6}>
+              <span style={{ fontSize: 12, color: '#64707C' }}>自动刷新</span>
+              <Switch size="small" checked={autoRefresh} onChange={setAutoRefresh} />
+            </Space>
+            <Button size="small" icon={<ReloadOutlined />} onClick={loadData}>刷新</Button>
+            <Segmented
+              value={plotId}
+              onChange={(v) => setPlotId(v as string)}
+              options={[
+                { value: 'all', label: '全基地' },
+                ...['P01', 'P03', 'P05', 'P07'].map((p) => ({ value: p, label: p })),
+              ]}
+            />
+          </Space>
         }
       />
 
@@ -246,6 +309,61 @@ export default function EnvMonitorPage() {
           </Card>
         </Col>
       </Row>
+
+      {/* 模拟器控制面板 */}
+      <Card
+        size="small"
+        title={
+          <Space>
+            <WarningOutlined style={{ color: '#C08A2E' }} />
+            <span>环境模拟器 · 异常注入（演示用）</span>
+            {simAnomaly && <Tag color="warning">当前异常：{simAnomaly}</Tag>}
+          </Space>
+        }
+        style={{ marginTop: 12 }}
+      >
+        <Space wrap>
+          <Button
+            size="small"
+            type={simAnomaly === 'high_temp' ? 'primary' : 'default'}
+            onClick={() => handleSetAnomaly(simAnomaly === 'high_temp' ? null : 'high_temp')}
+          >
+            🔥 高温异常
+          </Button>
+          <Button
+            size="small"
+            type={simAnomaly === 'high_humidity' ? 'primary' : 'default'}
+            onClick={() => handleSetAnomaly(simAnomaly === 'high_humidity' ? null : 'high_humidity')}
+          >
+            💧 高湿异常
+          </Button>
+          <Button
+            size="small"
+            type={simAnomaly === 'soil_wet' ? 'primary' : 'default'}
+            onClick={() => handleSetAnomaly(simAnomaly === 'soil_wet' ? null : 'soil_wet')}
+          >
+            🌊 土壤过湿
+          </Button>
+          <Button
+            size="small"
+            type={simAnomaly === 'low_light' ? 'primary' : 'default'}
+            onClick={() => handleSetAnomaly(simAnomaly === 'low_light' ? null : 'low_light')}
+          >
+            ☁️ 光照不足
+          </Button>
+          <Button
+            size="small"
+            danger
+            disabled={!simAnomaly}
+            onClick={() => handleSetAnomaly(null)}
+          >
+            恢复正常
+          </Button>
+          <span style={{ fontSize: 11, color: '#8B96A0', marginLeft: 8 }}>
+            开启自动刷新可实时观察数据变化
+          </span>
+        </Space>
+      </Card>
     </div>
   );
 }
